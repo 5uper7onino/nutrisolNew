@@ -79,7 +79,11 @@
         <a href="#about" x-smooth-scroll @click="mobileMenuOpen = false" class="text-xl text-gray-800 hover:text-primary">About</a>
         <a href="#menu" x-smooth-scroll @click="mobileMenuOpen = false" class="text-xl text-gray-800 hover:text-primary">Menu</a>
         <a href="#contact" x-smooth-scroll @click="mobileMenuOpen = false" class="text-xl text-gray-800 hover:text-primary">Contact</a>
-        <a href="#users" x-smooth-scroll @click="mobileMenuOpen = false" class="text-xl text-gray-800 hover:text-primary">Users</a>
+        @auth
+            @if (auth()->user()->is_admin)
+                <a href="#users" x-smooth-scroll @click="mobileMenuOpen = false" class="text-xl text-gray-800 hover:text-primary">Users</a>
+                @endif
+        @endauth
 
         <!-- Dropdown usuario en móvil -->
         <div x-data="{ open: false }" class="w-full text-center mt-4">
