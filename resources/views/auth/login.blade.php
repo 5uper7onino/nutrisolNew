@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout class="bg-transparent dsafasdfasdfasdffads">
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
@@ -7,11 +7,10 @@
         <x-validation-errors class="mb-4" />
 
         @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="mb-4 font-medium text-sm sdfsdfsdfdsfdsfsdfdsdf text-green-600">
                 {{ $value }}
             </div>
         @endsession
-
         <form method="POST" action="{{ route('login') }}">
             @csrf
 

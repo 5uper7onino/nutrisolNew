@@ -16,9 +16,21 @@
 
         <!-- Styles -->
         @livewireStyles
+    <style>
+        #app { /* .login-background { */
+        background-image: url('{{asset('img/bg_alimentaria.webp')}}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        align-items: center;
+        background-color: transparent;
+        border-radius: 15px;
+        }
+
+    </style>        
     </head>
     <body>
-        <div class="font-sans text-gray-900 antialiased">
+        <div id="app" class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
 
