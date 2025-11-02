@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta que sirve el layout principal (la aplicación con header/footer)
@@ -23,3 +24,9 @@ Route::get('/productos/crear',[ProductosController::class,'create'])->name('prod
 Route::post('/productos',[ProductosController::class,'store'])->name('productos.store');
 Route::get('/productos/{producto}/editar',[ProductosController::class,'edit'])->name('productos.edit');
 Route::put('/productos/{id}',[ProductosController::class,'update'])->name('productos.update');
+
+Route::get('/menus',[MenuController::class,'index'])->name('menus');
+Route::get('/menus/crear',[MenuController::class,'create'])->name('menus.create');
+Route::post('/menus',[MenuController::class,'store'])->name('menus.store');
+Route::get('/menus/{menu}/editar',[MenuController::class,'edit'])->name('menus.edit');
+Route::put('/menus/{id}',[MenuController::class,'update'])->name('menus.update');

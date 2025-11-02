@@ -37,27 +37,27 @@
         <!-- Menú escritorio -->
         <nav class="hidden lg:flex items-center space-x-6">
             <!-- Home usa route('home') -->
-            <a href="#" class="menu-link text-gray-600 hover:text-primary" data-url="{{ route('home') }}">Home</a>
+            <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('home') }}">Home</a>
             <!-- Los demás por ahora son placeholders -->
-            <a href="#" class="menu-link text-gray-600 hover:text-primary" data-url="#">Menús</a>
-            <a href="#" class="menu-link text-gray-600 hover:text-primary" data-url="{{ route('productos') }}">Productos</a>
+            <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('menus') }}">Menús</a>
+            <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('productos') }}">Productos</a>
             @auth
                 @if (Auth::user()->is_admin)
-                    <a href="#" class="menu-link text-gray-600 hover:text-primary" data-url="{{ route('usuarios') }}">Usuarios</a>
+                    <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('usuarios') }}">Usuarios</a>
                 @endif
             @endauth
 
             <!-- Dropdown usuario -->
             <div class="relative" x-data="{ open: false }">
-                <button @click="open = !open" class="flex items-center space-x-2 text-gray-600 hover:text-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <button @click="open = !open" class="flex items-center space-x-1 text-gray-600 hover:text-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none"
+                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z"/>
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                     </svg>
-                    <span>{{ Auth::user()->name ?? 'Usuario' }}</span>
+                    <span class="text-2xl text-orange-400 font-semibold">{{ Auth::user()->name ?? 'Usuario' }}</span>
                 </button>
 
                 <div x-show="open" @click.away="open = false" x-transition
@@ -96,7 +96,7 @@
     >
         <button @click="mobileMenuOpen = false" class="absolute top-6 right-6 text-2xl">✕</button>
         <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('home') }}">Home</a>
-        <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="#">Menús</a>
+        <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('menus') }}">Menús</a>
         <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('productos') }}">Productos</a>
         @auth
             @if (Auth::user()->is_admin)
@@ -121,7 +121,7 @@
         © {{ date('Y') }} Desarrollo de Sistemas - DIF Jalisco
     </div>
 </footer>
-@include('components.modalMenus',['id'=>'miformu','max-width'=>'599'])
+@include('components.modalMenus',['id'=>'miformu'])
     <script>
         document.addEventListener("click", async function (e) {
             // Botón "Nuevo Usuario"
