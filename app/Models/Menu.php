@@ -27,4 +27,11 @@ class Menu extends Model
     {
         return $this->belongsTo(Temporada::class, 'temporada_id');
     }
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'menu_producto', 'menu_id', 'producto_id')
+                    ->withPivot('cantidad','coste_unitario', 'coste_total')
+                    ->withTimestamps();
+    }   
 }

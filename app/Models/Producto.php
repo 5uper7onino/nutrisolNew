@@ -13,4 +13,10 @@ class Producto extends Model
         'tipo_id',
         'coste',
     ];
+
+    public function menus(){
+        return $this->belongsToMany(Menu::class, 'menu_producto', 'producto_id', 'menu_id')
+                    ->withPivot('cantidad','coste_unitario', 'coste_total')
+                    ->withTimestamps();
+    }
 }

@@ -20,7 +20,7 @@
     
         
 </head>
-<body x-data="{ mobileMenuOpen: false }" class="font-sans antialiased">
+<body x-data="{ mobileMenuOpen: false }" class="font-sans antialiased overflow-x-visible">
 
 <!-- Header / Menú -->
 <header class="bg-white shadow sticky top-0 z-50">
