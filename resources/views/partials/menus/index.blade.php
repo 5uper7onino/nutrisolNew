@@ -30,13 +30,13 @@
         <tbody>
             @foreach ($menus as $menu)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3 px-6">{{ $menu->id }}</td>
-                    <td class="py-3 px-6">{{ $menu->nombre }}</td>
-                    <td class="py-3 px-6 text-center">{{ $menu->descripcion }}</td>
-                    <td class="py-3 px-6 text-center">{{ $menu->comensales }}</td>
-                    <td class="py-3 px-6 text-center">{{ $menu->tipo->nombre }}</td>
-                    <td class="py-3 px-6 text-center">{{ $menu->temporada->nombre }}</td>
-                    <td class="py-3 px-6 text-center">
+                    <td class="py-1 px-3">{{ $menu->id }}</td>
+                    <td class="py-1 px-3">{{ $menu->nombre }}</td>
+                    <td class="py-1 px-3 text-center">{{ $menu->descripcion }}</td>
+                    <td class="py-1 px-3 text-center">{{ $menu->comensales }}</td>
+                    <td class="py-1 px-3 text-center">{{ $menu->tipo->nombre }}</td>
+                    <td class="py-1 px-3 text-center">{{ $menu->temporada->nombre }}</td>
+                    <td class="py-1 px-3 text-center">
                         <button
                         class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                         onclick="window.dispatchEvent(new CustomEvent('open-modal', {
@@ -59,9 +59,10 @@
     </div>
 </div>
 <script>
+
     document.addEventListener('reload-menus', () => {
         const tableContainer = document.querySelector('#main-content');
-    
+
         fetch('{{ route('menus') }}', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
             .then(res => res.text())
             .then(html => {
@@ -75,4 +76,4 @@
             .catch(err => console.error('Error recargando menus:', err));
     });
     </script>
-    
+

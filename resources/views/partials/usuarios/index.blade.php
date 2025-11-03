@@ -26,10 +26,10 @@
         <tbody>
             @foreach ($usuarios as $usuario)
                 <tr class="border-b hover:bg-gray-50">
-                    <td class="py-3 px-6">{{ $usuario->id }}</td>
-                    <td class="py-3 px-6">{{ $usuario->name }}</td>
-                    <td class="py-3 px-6">{{ $usuario->email }}</td>
-                    <td class="py-3 px-6 text-center">
+                    <td class="py-1 px-3">{{ $usuario->id }}</td>
+                    <td class="py-1 px-3">{{ $usuario->name }}</td>
+                    <td class="py-1 px-3">{{ $usuario->email }}</td>
+                    <td class="py-1 px-3 text-center">
                         <button
                         class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                         onclick="window.dispatchEvent(new CustomEvent('open-modal', {
@@ -54,7 +54,7 @@
 <script>
     document.addEventListener('reload-usuarios', () => {
         const tableContainer = document.querySelector('#main-content');
-    
+
         fetch('{{ route('usuarios') }}', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
             .then(res => res.text())
             .then(html => {
@@ -68,4 +68,4 @@
             .catch(err => console.error('Error recargando usuarios:', err));
     });
     </script>
-    
+
