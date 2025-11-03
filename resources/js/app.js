@@ -1,9 +1,10 @@
 import './bootstrap';
-import { initAjaxMenus } from './ajaxMenus';
+//import { initAjaxMenus } from './ajaxMenus';
+import { enableDynamicLoading } from './ajaxMenus';
 import { initAjaxForms,initUsuarios } from './ajaxForms';
 
 document.addEventListener("DOMContentLoaded", () => {
-    initAjaxMenus();
+    enableDynamicLoading();
     initAjaxForms();
     initUsuarios();
 })
