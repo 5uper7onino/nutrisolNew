@@ -85,7 +85,7 @@
                 class="w-full border rounded-lg px-3 py-2"
                 required
             >
-                <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione un tipo</option>
+                <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione Tipo</option>
                 @foreach ($tipos as $tipo)
                     <option value="{{ $tipo->id }}" {{ (isset($menu) && $menu->tipo_id == $tipo->id) ? 'selected' : '' }}>
                         {{ $tipo->nombre }}
@@ -101,7 +101,7 @@
                 class="w-full border rounded-lg px-3 py-2"
                 required
             >
-                <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione una temporada</option>
+                <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione Temporada</option>
                 @foreach ($temporadas as $temporada)
                     <option value="{{ $temporada->id }}" {{ (isset($menu) && $menu->temporada_id == $temporada->id) ? 'selected' : '' }}>
                         {{ $temporada->nombre }}
@@ -113,7 +113,7 @@
     
     <div class="mt-6 border-t pt-4">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Productos del menú</h3>
-        <hr>
+        
         <div 
             x-data="{
                 productos: [],
@@ -121,86 +121,103 @@
                 getCoste(id) {
                     let prod = this.lista.find(p => p.id == id);
                     return prod ? parseFloat(prod.coste) : 0;
+                },
+                get totalGeneral() {
+                    return this.productos.reduce((sum, p) => {
+                        const c = this.getCoste(p.producto_id);
+                        const q = parseFloat(p.cantidad) || 0;
+                        return sum + c * q;
+                    }, 0);
                 }
             }"
         >
-        <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden">
-            <thead>
-                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-center">Producto</th>
-                    <th class="py-3 px-6 text-center">Cantidad</th>
-                    <th class="py-3 px-6 text-center">Coste Unitario</th>
-                    <th class="py-3 px-6 text-center">Coste Total</th>
-                    <th class="py-3 px-2 text-center"></th>
+        <div class="h-80 overflow-auto mb-4 border-2 border-gray-400 rounded-2xl">
+            <table class="min-w-full border-separate border-spacing-0">
+              <thead class="bg-gray-100">
+                <tr class="text-gray-600 uppercase text-sm leading-normal">
+                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Producto</th>
+                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Cantidad</th>
+                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Coste Unitario</th>
+                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Coste Total</th>
+                  <th class="py-3 px-2 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300"></th>
                 </tr>
-            </thead>
-            <tbody>
-                <template x-for="(prod, index) in productos" :key="index">
-    
-                    <!-- Seleccionar producto -->
-                    <tr>
-                        <td class="px-1 py-2 text-center">
-                            <select
-                                class="border rounded-lg px-3 py-2 w-full"
-                                x-model="prod.producto_id"
-                                :name="'productos['+index+'][producto_id]'"
-                                required
-                            >
-                                <option value="" disabled>Seleccione un producto</option>
-                                <template x-for="item in lista" :key="item.id">
-                                    <option :value="item.id" x-text="item.nombre"></option>
-                                </template>
-                            </select>
-                        </td>
-                        <td class="pt-1 py-2 text-center">
-                            <!-- Cantidad -->
-                            <input
-                                type="number"
-                                step="0.5"
-                                min="0.5"
-                                class="border rounded-lg px-3 py-2 w-1/4"
-                                placeholder="Cantidad"
-                                x-model="prod.cantidad"
-                                :name="'productos['+index+'][cantidad]'"
-                                required
-                            >
-                        </td>
-                        <td class="px-1 py-2 text-center">
-                            <!-- Coste unitario -->
-                            <input
-                                type="text"
-                                readonly
-                                class="border rounded-lg px-3 py-2 w-1/4 bg-gray-100"
-                                x-bind:value="'$ '+getCoste(prod.producto_id).toFixed(2)"
-                                placeholder="Coste unitario"
-                            >
-                        </td>
-                        <td class="px-1 py-2 text-center">
-                            <!-- Coste total -->
-                            <input
-                                type="text"
-                                readonly
-                                class="border rounded-lg px-3 py-2 w-1/4 bg-gray-100"
-                                x-bind:value="'$ '+(getCoste(prod.producto_id) * prod.cantidad || 0).toFixed(2)"
-                                placeholder="Coste total"
-                            >
-                        </td>
-                        <td class="px-2">
-                            <!-- Eliminar fila -->
-                            <button 
-                                type="button"
-                                class="text-red-500 hover:text-red-700"
-                                @click="productos.splice(index, 1)">
-                                ✕
-                            </button>
-                        </td>
-                    </tr>
-    
-            </template>
-            </tbody>
-        </table>
+              </thead>
+              <tbody class="bg-white">
+                    <template x-for="(prod, index) in productos" :key="index">
+        
+                        <!-- Seleccionar producto -->
+                        <tr>
+                            <td class="px-1 py-2 text-center">
+                                <select
+                                    class="border rounded-lg px-3 py-2 w-full"
+                                    x-model="prod.producto_id"
+                                    :name="'productos['+index+'][producto_id]'"
+                                    required
+                                >
+                                    <option value="" disabled>Seleccione un producto</option>
+                                    <template x-for="item in lista" :key="item.id">
+                                        <option :value="item.id" x-text="item.nombre"></option>
+                                    </template>
+                                </select>
+                            </td>
+                            <td class="pt-1 py-2 text-center">
+                                <!-- Cantidad -->
+                                <input
+                                    type="number"
+                                    step="0.5"
+                                    min="0.5"
+                                    class="border rounded-lg px-3 py-2 w-1/4"
+                                    placeholder="Cantidad"
+                                    x-model="prod.cantidad"
+                                    :name="'productos['+index+'][cantidad]'"
+                                    required
+                                >
+                            </td>
+                            <td class="px-1 py-2 text-center">
+                                <!-- Coste unitario -->
+                                <input
+                                    type="text"
+                                    readonly
+                                    class="border rounded-lg px-3 py-2 w-1/4 bg-gray-100"
+                                    x-bind:value="'$ '+getCoste(prod.producto_id).toFixed(2)"
+                                    placeholder="Coste unitario"
+                                >
+                            </td>
+                            <td class="px-1 py-2 text-center">
+                                <!-- Coste total -->
+                                <input
+                                    type="text"
+                                    readonly
+                                    class="border rounded-lg px-3 py-2 w-1/4 bg-gray-100"
+                                    x-bind:value="'$ '+(getCoste(prod.producto_id) * prod.cantidad || 0).toFixed(2)"
+                                    placeholder="Coste total"
+                                >
+                            </td>
+                            <td class="px-2">
+                                <!-- Eliminar fila -->
+                                <button 
+                                    type="button"
+                                    class="text-red-500 hover:text-red-700"
+                                    @click="productos.splice(index, 1)">
+                                    ✕
+                                </button>
+                            </td>
+                        </tr>
+        
+                </template>
+                </tbody>
+            </table>
+        </div>
+
             
     
+        <div class="flex items-center justify-between mt-2">
+            <!-- Total general -->
+            <div class="text-right font-semibold text-gray-700">
+                Total general: 
+                <span class="text-green-600" x-text="'$ ' + totalGeneral.toFixed(2)"></span>
+            </div>
+        
             <!-- Botón para agregar producto -->
             <button
                 type="button"
@@ -208,6 +225,7 @@
                 @click="productos.push({producto_id: '', cantidad: ''})">
                 + Agregar producto
             </button>
+        </div>
         </div>
     </div>
     

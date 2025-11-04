@@ -27,7 +27,7 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
 >
 <div
 x-bind:class="[
-    'border-black  rounded-2xl shadow-xl w-11/12 sm:w-full p-6 relative transition-all duration-300',
+    'border-4 border-gray-200 rounded-2xl shadow-xl w-11/12 sm:w-full p-6 relative transition-all duration-300 bg-gray-300',
     width === 'max-w-sm' ? 'max-w-sm' :
     width === 'max-w-md' ? 'max-w-md' :
     width === 'max-w-lg' ? 'max-w-lg' :

@@ -14,45 +14,47 @@
         + Nuevo Menú
     </button>
     </div>
-
-    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
-        <thead>
-            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-left">ID</th>
-                <th class="py-3 px-6 text-left">Nombre</th>
-                <th class="py-3 px-6 text-center">Descripción</th>
-                <th class="py-3 px-6 text-center">Comensáles</th>
-                <th class="py-3 px-6 text-center">Tipo</th>
-                <th class="py-3 px-6 text-center">Temporada</th>
-                <th class="py-3 px-6 text-center">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($menus as $menu)
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-1 px-3">{{ $menu->id }}</td>
-                    <td class="py-1 px-3">{{ $menu->nombre }}</td>
-                    <td class="py-1 px-3 text-center">{{ $menu->descripcion }}</td>
-                    <td class="py-1 px-3 text-center">{{ $menu->comensales }}</td>
-                    <td class="py-1 px-3 text-center">{{ $menu->tipo->nombre }}</td>
-                    <td class="py-1 px-3 text-center">{{ $menu->temporada->nombre }}</td>
-                    <td class="py-1 px-3 text-center">
-                        <button
-                        class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-                        onclick="window.dispatchEvent(new CustomEvent('open-modal', {
-                            detail: {
-                                title: 'Editar menu',
-                                url: '{{ route('menus.edit', $menu->id) }}'
-                            }
-                        }))"
-                    >
-                        Editar
-                    </button>
-                    </td>
+    <div class="overflow-auto h-80">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+            <thead>
+                <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">ID</th>
+                    <th class="py-3 px-6 text-left">Nombre</th>
+                    <th class="py-3 px-6 text-center">Descripción</th>
+                    <th class="py-3 px-6 text-center">Comensáles</th>
+                    <th class="py-3 px-6 text-center">Tipo</th>
+                    <th class="py-3 px-6 text-center">Temporada</th>
+                    <th class="py-3 px-6 text-center">Acciones</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($menus as $menu)
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="py-1 px-3">{{ $menu->id }}</td>
+                        <td class="py-1 px-3">{{ $menu->nombre }}</td>
+                        <td class="py-1 px-3 text-center">{{ $menu->descripcion }}</td>
+                        <td class="py-1 px-3 text-center">{{ $menu->comensales }}</td>
+                        <td class="py-1 px-3 text-center">{{ $menu->tipo->nombre }}</td>
+                        <td class="py-1 px-3 text-center">{{ $menu->temporada->nombre }}</td>
+                        <td class="py-1 px-3 text-center">
+                            <button
+                            class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                            onclick="window.dispatchEvent(new CustomEvent('open-modal', {
+                                detail: {
+                                    title: 'Editar menu',
+                                    url: '{{ route('menus.edit', $menu->id) }}'
+                                }
+                            }))"
+                        >
+                            Editar
+                        </button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 
     <div class="mt-4">
         {{ $menus->links() }}
