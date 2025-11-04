@@ -30,7 +30,7 @@ class Menu extends Model
 
     public function productos()
     {
-        return $this->belongsToMany(Producto::class, 'menu_producto', 'menu_id', 'producto_id')
+        return $this->belongsToMany(Producto::class, 'menu_productos', 'menu_id', 'producto_id')
                     ->withPivot('cantidad','coste_unitario', 'coste_total')
                     ->withTimestamps();
     }   

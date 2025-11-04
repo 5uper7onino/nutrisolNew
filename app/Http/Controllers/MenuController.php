@@ -54,8 +54,8 @@ class MenuController extends Controller
         $menu = Menu::create($request->only(['nombre','descripcion','comensales','tipo_id','temporada_id']));
         if ($request->has('productos')) {
             foreach ($request->productos as $producto) {
-                $coste_unitario = Producto::find($producto['id'])->coste;
-                $menu->productos()->attach($producto['id'], [
+                $coste_unitario = Producto::find($producto['producto_id'])->coste;
+                $menu->productos()->attach($producto['producto_id'], [
                     'cantidad' => $producto['cantidad'],
                     'coste_unitario' => $coste_unitario,
                     'coste_total' => $producto['cantidad'] * $coste_unitario,
