@@ -16,12 +16,12 @@ class MenuController extends Controller
      */
     public function index(Request $request)
     {
-        $menus = Menu::paginate(10);
+        $menus = Menu::paginate(15);
         if ($request->ajax()) {
             // Solo devolvemos el contenido parcial (sin layout)
             return view('partials.menus.index', compact('menus'))->render();
         }
-    
+
         // 🔹 Si se accede directamente, devolver el layout principal
         return view('layouts.app');
     }
@@ -87,7 +87,18 @@ class MenuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $tipos = \App\Models\TipoMenu::all();
+        $temporadas = \App\Models\Temporada::all();
+        $productos = \App\Models\Producto::all();
+        $productosSeleccionados = $menu->productos->map(function ($p) {
+            return [
+                'producto_id' => $p->pivot->producto_id,
+                'cantidad' => (float) $p->pivot->cantidad,
+            ];
+        });
+        //dd($productosSeleccionados);
+        return view('partials.menus.form', ['menu' => $menu , 'tipos' => $tipos, 'temporadas' => $temporadas, 'productos' => $productos, 'productosSeleccionados' => $productosSeleccionados]);
     }
 
     /**
@@ -95,21 +106,27 @@ class MenuController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $menu = Menu::findOrFail($id);
-        $tipos = \App\Models\TipoMenu::all();
-        $request->validate([
+        $menu->update($request->only(['nombre','descripcion','comensales','tipo_id','temporada_id']));
+        /*$request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'comensales' => 'required|integer|min:1',
             'tipo_id' => 'required|exists:tipos_menu,id',
             'temporada_id' => 'required|exists:temporadas,id',
-        ]);
-        $menu->nombre = $request->nombre;
-        $menu->descripcion = $request->descripcion;
-        $menu->comensales = $request->comensales;
-        $menu->tipo_id = $request->tipo_id;
-        $menu->temporada_id = $request->temporada_id;
-        $menu->save();
+        ]);*/
+        if ($request->has('productos')) {
+            foreach ($request->productos as $producto) {
+                $coste_unitario = Producto::find($producto['producto_id'])->coste;
+                $menu->productos()->attach($producto['producto_id'], [
+                    'cantidad' => $producto['cantidad'],
+                    'coste_unitario' => $coste_unitario,
+                    'coste_total' => $producto['cantidad'] * $coste_unitario,
+                ]);
+            }
+        }
+
         // 🔹 Si la petición es AJAX (desde fetch
         if ($request->ajax()) {
             return response()->json([

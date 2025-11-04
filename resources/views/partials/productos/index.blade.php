@@ -1,6 +1,6 @@
-<div class="bg-white shadow-md rounded-lg p-6">
+<div class="bg-transparent shadow-md rounded-lg p-6">
     <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-semibold text-gray-700">Productos</h2>
+        <h2 class="text-4xl font-semibold text-gray-100">Productos</h2>
         <button
         class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
         onclick="window.dispatchEvent(new CustomEvent('open-modal', {
@@ -13,14 +13,14 @@
         + Nuevo Producto
     </button>
     </div>
-
-    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+    <div class="rounded-xl overflow-auto">
+    <table class="min-w-full bg-white/30 backdrop-blur-sm text-gray-900 rounded-xl select-none">
         <thead>
-            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-left">ID</th>
-                <th class="py-3 px-6 text-left">Nombre</th>
-                <th class="py-3 px-6 text-center">Precio</th>
-                <th class="py-3 px-6 text-center">Acciones</th>
+            <tr class="backdrop-blur-xl text-gray-900 uppercase text-sm leading-normal select-none">
+                <th class="py-3 px-6 text-gray-50 text-center text-lg">ID</th>
+                <th class="py-3 px-6 text-gray-50 text-center text-lg">Nombre</th>
+                <th class="py-3 px-6 text-gray-50 text-center text-lg">Precio</th>
+                <th class="py-3 px-6 text-gray-50 text-center text-lg">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +46,8 @@
             @endforeach
         </tbody>
     </table>
+    </div>
+
 
     <div class="mt-4">
         {{ $productos->links() }}

@@ -22,27 +22,27 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
     "
     x-show="open"
     x-cloak
-    class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-90 z-50"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50"
     x-transition.opacity.duration.400ms
 >
 <div
 x-bind:class="[
-    'border-4 border-gray-200 rounded-2xl shadow-xl w-11/12 sm:w-full p-6 relative transition-all duration-300 bg-gray-300',
+    'border-2 border-gray-200 rounded-2xl shadow-xl w-11/12 sm:w-full p-6 relative transition-all duration-300 backdrop-blur-md',
     width === 'max-w-sm' ? 'max-w-sm' :
     width === 'max-w-md' ? 'max-w-md' :
     width === 'max-w-lg' ? 'max-w-lg' :
-    width === 'max-w-7xl' ? 'max-w-7xl' : 
+    width === 'max-w-7xl' ? 'max-w-7xl' :
     width === 'full' ? 'w-full h-full' : 'max-w-2xl'
 ]"
 >
         <button
             @click="open = false"
-            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl leading-none"
+            class="absolute top-3 right-3 text-gray-100 hover:text-red-600 text-4xl font-bold leading-none"
         >
             &times;
         </button>
 
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4" x-text="title"></h2>
+        <h2 class="text-2xl font-semibold text-gray-100 mb-4" x-text="title"></h2>
 
         <div x-html="content"></div>
     </div>
