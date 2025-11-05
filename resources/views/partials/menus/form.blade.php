@@ -156,7 +156,7 @@
                                 >
                                     <option value="" disabled>Seleccione</option>
                                     <template x-for="item in lista" :key="item.id">
-                                        <option :value="item.id" x-text="item.nombre"></option>
+                                        <option :value="item.id" x-text="item.nombre" x-bind:selected="item.id == prod.producto_id"></option>
                                     </template>
                                 </select>
                             </td>

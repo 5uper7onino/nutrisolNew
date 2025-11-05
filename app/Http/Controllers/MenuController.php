@@ -90,10 +90,10 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         $tipos = \App\Models\TipoMenu::all();
         $temporadas = \App\Models\Temporada::all();
-        $productos = \App\Models\Producto::all();
+        $productos = \App\Models\Producto::select('id','nombre','coste')->get();
         $productosSeleccionados = $menu->productos->map(function ($p) {
             return [
-                'producto_id' => $p->pivot->producto_id,
+                'producto_id' => (int) $p->pivot->producto_id,
                 'cantidad' => (float) $p->pivot->cantidad,
             ];
         });
@@ -116,24 +116,28 @@ class MenuController extends Controller
             'tipo_id' => 'required|exists:tipos_menu,id',
             'temporada_id' => 'required|exists:temporadas,id',
         ]);*/
+        \Log::info('Actualizando menú: ' . json_encode($request->productos));
         if ($request->has('productos')) {
+            $syncData = [];
+        
             foreach ($request->productos as $producto) {
                 $coste_unitario = Producto::find($producto['producto_id'])->coste;
-                $menu->productos()->attach($producto['producto_id'], [
+                $syncData[$producto['producto_id']] = [
                     'cantidad' => $producto['cantidad'],
                     'coste_unitario' => $coste_unitario,
                     'coste_total' => $producto['cantidad'] * $coste_unitario,
+                ];
+            }
+        
+            // Reemplaza los productos existentes por los nuevos
+            $menu->productos()->sync($syncData);
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Menú creado correctamente.',
+                    'menu' => $menu
                 ]);
             }
-        }
-
-        // 🔹 Si la petición es AJAX (desde fetch
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Menú actualizado correctamente.',
-                'menu' => $menu
-            ]);
         }
     }
 
