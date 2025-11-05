@@ -7,7 +7,7 @@ use App\Models\Menu;
 use App\Models\Producto;
 use App\Models\TipoMenu;
 use App\Models\Temporada;
-
+use Illuminate\Support\Facades\Log;
 
 class MenuController extends Controller
 {
@@ -116,7 +116,7 @@ class MenuController extends Controller
             'tipo_id' => 'required|exists:tipos_menu,id',
             'temporada_id' => 'required|exists:temporadas,id',
         ]);*/
-        \Log::info('Actualizando menú: ' . json_encode($request->productos));
+        Log::info('Actualizando menú: ' . json_encode($request->productos));
         if ($request->has('productos')) {
             $syncData = [];
         
