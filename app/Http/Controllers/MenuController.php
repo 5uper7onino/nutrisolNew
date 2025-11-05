@@ -119,7 +119,7 @@ class MenuController extends Controller
         Log::info('Actualizando menú: ' . json_encode($request->productos));
         if ($request->has('productos')) {
             $syncData = [];
-        
+
             foreach ($request->productos as $producto) {
                 $coste_unitario = Producto::find($producto['producto_id'])->coste;
                 $syncData[$producto['producto_id']] = [
@@ -128,7 +128,7 @@ class MenuController extends Controller
                     'coste_total' => $producto['cantidad'] * $coste_unitario,
                 ];
             }
-        
+
             // Reemplaza los productos existentes por los nuevos
             $menu->productos()->sync($syncData);
             if ($request->ajax()) {
@@ -146,6 +146,12 @@ class MenuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->productos()->detach();
+        $menu->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Menú eliminado correctamente.'
+        ]);
     }
 }

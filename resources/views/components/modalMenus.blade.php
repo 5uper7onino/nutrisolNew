@@ -32,7 +32,7 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
         width === 'max-w-md' ? 'max-w-md' :
         width === 'max-w-lg' ? 'max-w-lg' :
         width === 'max-w-7xl' ? 'max-w-7xl' :
-        width === 'full' ? 'w-full h-full' : 'max-w-2xl'
+        width === 'full' ? 'w-full h-full' : 'max-w-3xl'
     ]"
     >
             <button
@@ -41,9 +41,11 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
             >
                 &times;
             </button>
-    
+
+
+
             <h2 class="text-2xl font-semibold text-gray-100 mb-4" x-text="title"></h2>
-    
+
             <div x-html="content"></div>
         </div>
 

@@ -3,6 +3,8 @@ import './bootstrap';
 import { enableDynamicLoading } from './ajaxMenus';
 import { initAjaxForms,initUsuarios } from './ajaxForms';
 
+import '@fortawesome/fontawesome-free/js/all.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     enableDynamicLoading();
     initAjaxForms();

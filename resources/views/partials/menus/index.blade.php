@@ -36,7 +36,7 @@
                         <td class="py-1 font-bold px-3 text-center">{{ $menu->comensales }}</td>
                         <td class="py-1 font-bold px-3 text-center">{{ $menu->tipo->nombre }}</td>
                         <td class="py-1 font-bold px-3 text-center">{{ $menu->temporada->nombre }}</td>
-                        <td class="py-1 font-bold px-3 text-center">
+                        <td class="py-1 font-bold px-3 text-center flex items-center justify-center gap-2">
                             <button
                             class="bg-yellow-500/40 text-white px-3 py-1 rounded hover:bg-yellow-500 backdrop-blur-sm"
                             onclick="window.dispatchEvent(new CustomEvent('open-modal', {
@@ -46,8 +46,21 @@
                                 }
                             }))"
                         >
-                            Editar
+                            <i class="fa fa-edit"></i>
                         </button>
+                        <form action="{{route('menus.destroy', $menu->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="menu_id" value="{{ $menu->id }}">
+                            <button
+                                type="submit"
+                                class="bg-red-500/40 text-white px-3 py-1 rounded hover:bg-red-600 backdrop-blur-sm mt-1"
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar este menú?')"
+                            ><i class="fa fa-trash"></i>
+
+                            </button>
+                        </form>
+
                         </td>
                     </tr>
                 @endforeach

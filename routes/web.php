@@ -30,3 +30,4 @@ Route::get('/menus/crear',[MenuController::class,'create'])->name('menus.create'
 Route::post('/menus',[MenuController::class,'store'])->name('menus.store');
 Route::get('/menus/{menu}/editar',[MenuController::class,'edit'])->name('menus.edit');
 Route::put('/menus/{id}',[MenuController::class,'update'])->name('menus.update');
+Route::delete('/menus/{id}',[MenuController::class,'destroy'])->name('menus.destroy');

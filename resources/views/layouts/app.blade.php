@@ -56,7 +56,7 @@ html{
             <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('productos') }}">Productos</a>
             @auth
                 @if (Auth::user()->is_admin)
-                    <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('usuarios') }}">Usuarios</a>
+                    <a href="#" class="menu-link text-xl text-gray-600 hover:text-primary" data-url="{{ route('usuarios') }}"><i data-lucide="user"></i>Usuarios</a>
                 @endif
             @endauth
 
