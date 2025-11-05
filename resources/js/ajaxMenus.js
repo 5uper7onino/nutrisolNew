@@ -4,6 +4,7 @@ export function enableDynamicLoading(containerSelector = 'body', mainSelector = 
 
     container.addEventListener('click', async (e) => {
         const el = e.target.closest('a, [data-url]');
+        console.log("Elemento clicado:", el);
         if (!el) return; // No es un enlace ni tiene data-url
 
         const url = el.dataset.url || el.getAttribute('href');
