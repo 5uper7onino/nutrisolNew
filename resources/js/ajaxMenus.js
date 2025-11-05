@@ -75,7 +75,7 @@ export function initAjaxMenus(){
                         headers: { 'X-Requested-With': 'XMLHttpRequest' }
                     });
 
-                    if (!response.ok) throw new Error("Error al cargar la vista");
+                    if (!response.ok) throw new Error("fdsfdsdfsdfsdfsdfsdfsdf vista");
 
                     const html = await response.text();
                     main.innerHTML = html;
