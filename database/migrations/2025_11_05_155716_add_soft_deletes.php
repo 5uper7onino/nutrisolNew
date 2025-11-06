@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('menus', function (Blueprint $table) {
             $table->softDeletes();
         });
-        Schema::table('productos_menus', function (Blueprint $table) {
+        Schema::table('menu_productos', function (Blueprint $table) {
             $table->softDeletes();
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration
         Schema::table('menus', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
-        Schema::table('productos_menus', function (Blueprint $table) {
+        Schema::table('menu_productos', function (Blueprint $table) {
             $table->dropSoftDeletes();
         });
     }
