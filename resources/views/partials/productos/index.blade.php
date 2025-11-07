@@ -14,9 +14,9 @@
     </button>
     </div>
     <div class="rounded-xl overflow-auto">
-    <table class="min-w-full bg-white/30 backdrop-blur-sm text-gray-900 rounded-xl select-none">
+    <table class="min-w-full text-gray-900 rounded-xl select-none">
         <thead>
-            <tr class="backdrop-blur-xl text-gray-900 uppercase text-sm leading-normal select-none">
+            <tr class="backdrop-blur-xl text-gray-50 uppercase leading-normal select-none">
                 <th class="py-3 px-6 text-gray-50 text-center text-lg">ID</th>
                 <th class="py-3 px-6 text-gray-50 text-center text-lg">Nombre</th>
                 <th class="py-3 px-6 text-gray-50 text-center text-lg">Precio</th>
@@ -25,11 +25,11 @@
         </thead>
         <tbody>
             @foreach ($productos as $producto)
-                <tr class="border-b hover:bg-gray-50">
-                    <td class="py-1 px-3">{{ $producto->id }}</td>
-                    <td class="py-1 px-3">{{ $producto->nombre }}</td>
-                    <td class="py-1 px-3 text-center">$ {{ $producto->coste }}</td>
-                    <td class="py-1 px-3 text-center">
+                <tr class="border-b hover:bg-white/20">
+                    <td class="py-1 text-gray-100 font-bold px-3">{{ $producto->id }}</td>
+                    <td class="py-1 text-gray-100 font-bold px-3">{{ $producto->nombre }}</td>
+                    <td class="py-1 text-gray-100 font-bold px-3 text-center">$ {{ $producto->coste }}</td>
+                    <td class="py-1 text-gray-100 font-bold px-3 text-center">
                         <button
                         class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                         onclick="window.dispatchEvent(new CustomEvent('open-modal', {

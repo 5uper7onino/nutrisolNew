@@ -16,8 +16,6 @@ return new class extends Migration
             $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
             $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
             $table->decimal('cantidad',10,2);
-            $table->decimal('coste_unitario',10,2);
-            $table->decimal('coste_total',10,2);
             $table->timestamps();
         });
     }

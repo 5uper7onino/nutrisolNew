@@ -15,7 +15,7 @@
     </button>
     </div>
     <div class="overflow-auto rounded-xl">
-        <table class="min-w-full bg-white/30 backdrop-blur-sm text-gray-900 rounded-xl select-none">
+        <table class="min-w-full bg-black/30 backdrop-blur-sm text-gray-100 rounded-xl select-none">
             <thead>
                 <tr class="backdrop-blur-xl text-gray-900 uppercase text-sm leading-normal select-none">
                     <th class="py-3 px-6 text-gray-50 text-center text-lg">ID</th>
@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 @foreach ($menus as $menu)
-                    <tr class="border-b hover:bg-gray-50">
+                    <tr class="border-b hover:bg-white/20">
                         <td class="py-1 font-bold px-3">{{ $menu->id }}</td>
                         <td class="py-1 font-bold px-3">{{ $menu->nombre }}</td>
                         <td class="py-1 font-bold px-3 text-center">{{ $menu->descripcion }}</td>
@@ -38,7 +38,7 @@
                         <td class="py-1 font-bold px-3 text-center">{{ $menu->temporada->nombre }}</td>
                         <td class="py-1 font-bold px-3 text-center flex items-center justify-center gap-2">
                             <button
-                            class="bg-yellow-500/40 text-white px-3 py-1 rounded hover:bg-yellow-500 backdrop-blur-sm"
+                            class="bg-yellow-500/10 border-2 border-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-500"
                             onclick="window.dispatchEvent(new CustomEvent('open-modal', {
                                 detail: {
                                     title: 'Editar menu',
@@ -54,7 +54,10 @@
                             <input type="hidden" name="menu_id" value="{{ $menu->id }}">
                             <button
                                 type="submit"
-                                class="bg-red-500/40 text-white px-3 py-1 rounded hover:bg-red-600 backdrop-blur-sm mt-1"
+                                class="relative px-3 py-1 rounded-lg border-2 border-red-500/60 text-white font-medium
+                                        bg-gradient-to-br from-red-600/50 via-red-600/20 to-red-900/10
+                                        hover:from-red-600/40 hover:via-red-700/30 hover:to-red-900/20
+                                        transition-all duration-300 shadow-md hover:shadow-red-500/30"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar este menú?')"
                             ><i class="fa fa-trash"></i>
 
