@@ -35,51 +35,36 @@
 "
 
     class="space-y-4"
+
 >
 @csrf
     <div>
-        <label class="block text-sm text-gray-600 mb-1">Nombre</label>
+        <label class="block text-sm text-gray-800 font-bold mb-1">Nombre</label>
         <input
             type="text"
             name="nombre"
             value="{{ $producto->nombre ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2"
+            class="w-full border rounded-lg px-3 py-2 bg-white/20"
             placeholder="Nombre completo"
             required
         >
     </div>
 
     <div>
-        <label class="block text-sm text-gray-600 mb-1">Precio
+        <label class="block text-sm text-gray-800 font-bold mb-1">Precio
         </label>
         <input
             type="text"
             name="coste"
             value="{{ $producto->coste ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2"
+            class="w-full border rounded-lg px-3 py-2 bg-white/20"
             placeholder="Descripción"
             required
         >
     </div>
-    <!--div class="flex items-center space-x-3">
-        <label class="relative inline-flex items-center cursor-pointer">
-            <input 
-                type="checkbox" 
-                name="is_admin" 
-                value="1"
-                {{-- isset($producto) && $producto->is_admin ? 'checked' : '' --}}
-                class="sr-only peer"
-            >
-            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-orange-500 transition-all duration-300"></div>
-            <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-md transform peer-checked:translate-x-5 transition-all duration-300"></div>
-            <span class="ml-3 text-gray-700 font-medium select-none">Administrador</span>
-        </label>
-    </div-->
-    
-    
 
     <div class="flex justify-end">
-        <button type="button" class="bg-gray-300 px-4 py-2 rounded mr-2" @click="$dispatch('close-modal')">Cancelar</button>
-        <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">Guardar</button>
+        <button type="button" class="bg-gray-400/50 px-4 py-2 rounded mr-2" @click="$dispatch('close-modal')">Cancelar</button>
+        <button type="submit" class="bg-orange-500/20 backdrop-blur-md text-white px-4 py-2 rounded hover:bg-orange-600">Guardar</button>
     </div>
 </form>

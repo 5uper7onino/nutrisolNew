@@ -38,26 +38,26 @@
 >
 @csrf
 <div class="flex justify-start gap-x-6">
-    <div class="w-1/3">
+    <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
         <label class="block font-semibold text-gray-200 mb-1">Nombre</label>
         <input
             type="text"
             name="nombre"
             value="{{ $menu->nombre ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500"
+            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
             placeholder="¿Cómo se llama el menú?"
             required
         >
     </div>
 
-    <div class="w-2/3">
+    <div class="w-2/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
         <label class="block font-semibold text-gray-200 mb-1">Descripción
         </label>
         <input
             type="text"
             name="descripcion"
             value="{{ $menu->descripcion ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500"
+            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
             placeholder="Milanesa de pollo, ensalada, fruta..."
             required
         >
@@ -65,24 +65,24 @@
 
 </div>
     <div class="flex justify-start gap-x-6">
-        <div class="w-1/3">
+        <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
             <label class="block font-semibold text-gray-200 mb-1">Comensales
             </label>
             <input
                 type="number"
                 name="comensales"
                 value="{{ $menu->comensales ?? '' }}"
-                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500"
+                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
                 placeholder="Número de comensales"
                 required
             >
         </div>
-        <div class="w-1/3">
+        <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
             <label class="block font-semibold text-gray-200 mb-1">Tipo
             </label>
             <select
                 name="tipo_id"
-                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500"
+                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
                 required
             >
                 <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione</option>
@@ -93,12 +93,12 @@
                 @endforeach
             </select>
         </div>
-        <div class="w-1/3">
+        <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
             <label class="block font-semibold text-gray-200 mb-1">Temporada
             </label>
             <select
                 name="temporada_id"
-                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500"
+                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
                 required
             >
                 <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione</option>
@@ -132,14 +132,14 @@
             }"
         >
         <div class="h-80 overflow-auto mb-4 border-2 border-gray-400 rounded-2xl my-scroll">
-            <table class="min-w-full bg-white/30 backdrop-blur-sm text-gray-900 rounded-xl select-none">
+            <table class="min-w-full text-gray-900 rounded-xl select-none">
               <thead >
-                <tr class="backdrop-blur-xl text-gray-900 uppercase text-sm leading-normal select-none">
-                  <th colspan="4" class="py-3 px-6  sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Producto</th>
-                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Cantidad</th>
-                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Coste Unitario</th>
-                  <th class="py-3 px-6 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300">Coste Total</th>
-                  <th class="py-3 px-2 sticky top-0 z-20 bg-gray-100 text-center border-b border-gray-300"></th>
+                <tr class="text-gray-900 uppercase text-sm leading-normal select-none">
+                  <th colspan="4" class="py-3 px-6  sticky top-0 z-20 text-center border-b border-gray-300 backdrop-blur-md bg-white/20 font-bold">Producto</th>
+                  <th class="py-3 px-6 sticky top-0 z-20 text-center border-b border-gray-300 backdrop-blur-md bg-white/20 font-bold">Cantidad</th>
+                  <th class="py-3 px-6 sticky top-0 z-20 text-center border-b border-gray-300 backdrop-blur-md bg-white/20 font-bold">Coste Unitario</th>
+                  <th class="py-3 px-6 sticky top-0 z-20 text-center border-b border-gray-300 backdrop-blur-md bg-white/20 font-bold">Coste Total</th>
+                  <th class="py-3 px-2 sticky top-0 z-20 text-center border-b border-gray-300 backdrop-blur-md bg-white/20 font-bold"></th>
                 </tr>
               </thead>
               <tbody class="">
@@ -149,7 +149,7 @@
                         <tr>
                             <td colspan="4" class="px-1 py-2 text-center">
                                 <select
-                                    class="border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500"
+                                    class="border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
                                     x-model="prod.producto_id"
                                     :name="'productos['+index+'][producto_id]'"
                                     required
@@ -166,10 +166,11 @@
                                     type="number"
                                     step="0.5"
                                     min="0.5"
-                                    class="border rounded-lg px-3 py-2 w-1/4 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 w-2/3"
+                                    class="border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 w-2/3 backdrop-blur-md bg-white/20 font-bold"
                                     placeholder="Cantidad"
                                     x-model="prod.cantidad"
                                     :name="'productos['+index+'][cantidad]'"
+                                    x-value="1"
                                     required
                                 >
 
@@ -179,7 +180,7 @@
                                 <input
                                     type="text"
                                     readonly
-                                    class="border rounded-lg px-3 py-2 bg-gray-100 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 w-2/3"
+                                    class="border rounded-lg px-3 py-2 bg-gray-100 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 w-2/3 backdrop-blur-md bg-white/20 font-bold"
                                     x-bind:value="'$ '+getCoste(prod.producto_id).toFixed(2)"
                                     placeholder="Coste unitario"
                                 >
@@ -189,7 +190,7 @@
                                 <input
                                     type="text"
                                     readonly
-                                    class="border rounded-lg px-3 py-2 w-1/4 bg-gray-100 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 w-2/3"
+                                    class="border rounded-lg px-3 py-2 w-1/4 bg-gray-100 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 w-2/3 backdrop-blur-md bg-white/20 font-bold"
                                     x-bind:value="'$ '+(getCoste(prod.producto_id) * prod.cantidad || 0).toFixed(2)"
                                     placeholder="Coste total"
                                 >
@@ -222,7 +223,7 @@
             <!-- Botón para agregar producto -->
             <button
                 type="button"
-                class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 text-semibold"
+                class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700/70 text-semibold backdrop-blur-md bg-green-700/50"
                 @click="productos.push({producto_id: '', cantidad: ''})">
                 + Agregar producto
             </button>

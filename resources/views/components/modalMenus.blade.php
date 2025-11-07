@@ -23,17 +23,19 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
     x-show="open"
     x-cloak
     class="fixed inset-0 flex items-center justify-center backdrop-blur z-50"
+
     x-transition.opacity.50.duration.800ms
 >
     <div
     x-bind:class="[
-        'border-2 border-gray-600 rounded-2xl shadow-3xl bg-transparent w-11/12 sm:w-full p-6 relative ',
+        'border border-gray-600 rounded-2xl shadow-3xl bg-gray-900/10 w-11/12 sm:w-full p-6 relative ',
         width === 'max-w-sm' ? 'max-w-sm' :
         width === 'max-w-md' ? 'max-w-md' :
         width === 'max-w-lg' ? 'max-w-lg' :
         width === 'max-w-7xl' ? 'max-w-7xl' :
         width === 'full' ? 'w-full h-full' : 'max-w-3xl'
     ]"
+    style="background-image: url('{{asset("img/Blog-antiguo-1024x738-3.jpg")}}'); background-size: cover; background-position: center; backdrop-filter: blur(10px);"
     >
             <button
                 @click="open = false"
