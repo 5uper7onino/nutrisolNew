@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\PacienteController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta que sirve el layout principal (la aplicación con header/footer)
@@ -31,3 +32,5 @@ Route::post('/menus',[MenuController::class,'store'])->name('menus.store');
 Route::get('/menus/{menu}/editar',[MenuController::class,'edit'])->name('menus.edit');
 Route::put('/menus/{id}',[MenuController::class,'update'])->name('menus.update');
 Route::delete('/menus/{id}',[MenuController::class,'destroy'])->name('menus.destroy');
+
+Route::resource('pacientes',PacienteController::class);

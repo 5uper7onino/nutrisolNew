@@ -28,25 +28,26 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
 >
     <div
     x-bind:class="[
-        'border border-green-600 rounded-2xl shadow-3xl bg-gray-900/10 w-11/12 sm:w-full p-6 relative ',
+        'border-4 border-orange-600 rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full p-6 relative ',
         width === 'max-w-sm' ? 'max-w-sm' :
         width === 'max-w-md' ? 'max-w-md' :
         width === 'max-w-lg' ? 'max-w-lg' :
         width === 'max-w-7xl' ? 'max-w-7xl' :
+        width === 'max-w-8xl' ? 'max-w-[70%]' :
         width === 'full' ? 'w-full h-full' : 'max-w-3xl'
     ]">
     <!--style="background-image: url('{{asset("img/Blog-antiguo-1024x738-3.jpg")}}'); background-size: cover; background-position: center; backdrop-filter: blur(10px)"-->
 
             <button
                 @click="open = false"
-                class="absolute top-3 right-3 text-gray-100 hover:text-red-600 text-4xl font-bold leading-none"
+                class="absolute top-3 right-3 text-orange-700 hover:text-red-600 text-4xl font-bold leading-none"
             >
                 &times;
             </button>
 
 
 
-            <h2 class="text-2xl font-semibold text-gray-100 mb-4" x-text="title"></h2>
+            <h2 class="text-2xl font-semibold text-orange-700 mb-4" x-text="title"></h2>
 
             <div x-html="content"></div>
         </div>

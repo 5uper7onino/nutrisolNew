@@ -38,17 +38,7 @@
 >
 @csrf
 <div class="flex justify-start gap-x-6">
-    <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
-        <label class="block font-semibold text-gray-200 mb-1">Nombre</label>
-        <input
-            type="text"
-            name="nombre"
-            value="{{ $menu->nombre ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-            placeholder="¿Cómo se llama el menú?"
-            required
-        >
-    </div>
+    <x-input-number label="Nombre" name="nombre" type="text" :value="$menu->nombre ?? ''" placeholder="Escriba nombre" width="2/3" required />
 
     <div class="w-2/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
         <label class="block font-semibold text-gray-200 mb-1">Descripción
@@ -65,41 +55,15 @@
 
 </div>
     <div class="flex justify-start gap-x-6">
-        <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
-            <label class="block font-semibold text-gray-200 mb-1">Comensales
-            </label>
-            <input
-                type="number"
-                name="comensales"
-                value="{{ $menu->comensales ?? '' }}"
-                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-                placeholder="Número de comensales"
-                required
-            >
-        </div>
-        <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
-            <label class="block font-semibold text-gray-200 mb-1">Tipo
-            </label>
-            <select
-                name="tipo_id"
-                class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-                required
-            >
-                <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione</option>
-                @foreach ($tipos as $tipo)
-                    <option value="{{ $tipo->id }}" {{ (isset($menu) && $menu->tipo_id == $tipo->id) ? 'selected' : '' }}>
-                        {{ $tipo->nombre }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        <x-select-field label="Tipo" name="tipo_id" :options="$tipos"  :selected="$menu->id ?? null" placeholder="Elija"/>
+        <x-select-field label="Temporada" name="temporada_id" :options="$temporadas" :selected="$menu->id ?? null" placeholder="Elija" />    
         <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
             <label class="block font-semibold text-gray-200 mb-1">Temporada
             </label>
             <select
                 name="temporada_id"
                 class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-                required
+                required 
             >
                 <option value="" disabled {{ !isset($menu) ? 'selected' : '' }}>Seleccione</option>
                 @foreach ($temporadas as $temporada)
