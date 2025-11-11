@@ -25,4 +25,10 @@ class Paciente extends Model
     protected $dates = [
         'fecha_nacimiento',
     ];
+
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+
 }

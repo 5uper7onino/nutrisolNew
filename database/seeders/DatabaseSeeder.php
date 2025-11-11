@@ -19,21 +19,25 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => Hash::make('password'),
-                'is_admin' => true,
-                'email_verified_at' => now(),
-            ]
-        );
+
 
         $this->call([
             TiposMenuSeeder::class,
             TemporadasSeeder::class,
             MenusSeeder::class,
+            SucursalesSeeder::class,
             ProductosSeeder::class,
         ]);
+
+                User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+                'is_admin' => true,
+                'sucursal_id' => 1,
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }

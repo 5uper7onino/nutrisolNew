@@ -6,7 +6,9 @@
         onclick="window.dispatchEvent(new CustomEvent('open-modal', {
             detail: {
                 title: 'Nuevo Usuario',
-                url: '{{ route('usuarios.create') }}'
+                url: '{{ route('usuarios.create') }}',
+
+
             }
         }))"
     >

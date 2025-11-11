@@ -29,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'is_admin',
+        'sucursal_id',
         'password',
     ];
 
@@ -65,4 +66,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function sucursales()
+    {
+        return $this->belongsToMany(Sucursal::class);
+    }
+
 }
