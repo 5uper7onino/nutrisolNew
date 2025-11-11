@@ -39,6 +39,14 @@
 @csrf
     <div>
         <label class="block text-sm text-gray-600 mb-1">Nombre</label>
+        <x-input-number type="text" label="Nombre" name="name" :value="$usuario->name ?? ''" placeholder="Nombre"/>
+        <x-nice-input
+            type="text"
+            name="name"
+            label="Nombre"
+            :value="$usuario->name ?? ''"
+            placeholder="Nombre completo"
+            required />
         <input
             type="text"
             name="name"

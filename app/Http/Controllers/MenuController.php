@@ -90,7 +90,7 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         $tipos = \App\Models\TipoMenu::all();
         $temporadas = \App\Models\Temporada::all();
-        $productos = \App\Models\Producto::select('id','nombre','coste')->get();
+        $productos = \App\Models\Producto::select('id','nombre')->get() ?? [];
         $productosSeleccionados = $menu->productos->map(function ($p) {
             return [
                 'producto_id' => (int) $p->pivot->producto_id,

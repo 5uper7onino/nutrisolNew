@@ -32,7 +32,7 @@
   <!-- Sidebar lateral fijo -->
   <aside class="hidden lg:flex flex-col w-64 bg-white/30 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
     <div class="flex flex-col items-center py-6 space-y-4">
-      <x-logo-nutrisol size="96" />
+      <x-logo-nutrisol size="80" />
       <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">SAMI</h1>
       <span class="text-center text-sm text-gray-700 dark:text-gray-300 px-4">
         Sistema de Administración de Menús e Insumos
