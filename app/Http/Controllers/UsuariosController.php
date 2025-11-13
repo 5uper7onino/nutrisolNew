@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Encoders\JpegEncoder;
+use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Sucursal;
+use Log;
 
 class UsuariosController extends Controller
 {
@@ -29,6 +32,7 @@ class UsuariosController extends Controller
 
     public function create()
     {
+        
         $sucursales = Sucursal::select('id', 'nombre')->get();
         return view('partials.usuarios.form', ['usuario' => null, 'sucursales' => $sucursales]);
     }
@@ -49,9 +53,9 @@ class UsuariosController extends Controller
             'is_admin' => 'sometimes|boolean',
             'password' => 'required|min:6',
             'sucursal_id' => 'required|exists:sucursales,id',
-            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
-
+    
         // Crear usuario base
         $user = User::create([
             'name' => $request->name,
@@ -60,29 +64,33 @@ class UsuariosController extends Controller
             'password' => bcrypt($request->password),
             'sucursal_id' => $request->sucursal_id,
         ]);
-
+    
         // 🔹 Procesar imagen si se subió
-        if ($request->hasFile('imagen')) {
-            $image = $request->file('imagen');
+        if ($request->hasFile('profile_photo')) {
+            $file = $request->file('profile_photo');
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file->getRealPath())->cover(800, 800);
+    
+            // Carpeta y nombre del archivo
+            $folder = "users/{$user->id}";
             $filename = uniqid('user_') . '.jpg';
+            $relativePath = "$folder/$filename";
+    
+            // Crear la carpeta si no existe
+            Storage::makeDirectory($folder);
+    
+            // Guardar la imagen dentro de storage/app/public/
+            Storage::disk('public')->put($relativePath, (string) $image->encode(new JpegEncoder(quality: 80)));
+    
+            // Guardar la ruta accesible públicamente
+            //$user->profile_photo_path = "storage/$relativePath";
+            $user->profile_photo_path = "storage/users/{$user->id}/{$filename}";
 
-            // Redimensionar (si la imagen es más grande que 800x800) y comprimir
-            $imageResized = Image::make($image)
-                ->orientate()
-                ->resize(800, 800, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize(); // evita estirarla si es más pequeña
-                })
-                ->encode('jpg', 70); // 70% calidad para buena compresión
-
-            // Guardar en storage/app/public/usuarios
-            Storage::disk('public')->put("usuarios/{$filename}", $imageResized);
-
-            // Guardar la ruta en el campo profile_photo_path
-            $user->profile_photo_path = "usuarios/{$filename}";
             $user->save();
+    
+            Log::info("Imagen guardada correctamente", ['path' => $user->profile_photo_path]);
         }
-
+    
         // 🔹 Respuesta AJAX
         if ($request->ajax()) {
             return response()->json([
@@ -91,7 +99,7 @@ class UsuariosController extends Controller
                 'user' => $user
             ]);
         }
-
+    
         // 🔹 Respuesta normal
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente.');
     }

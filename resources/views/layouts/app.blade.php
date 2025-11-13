@@ -30,50 +30,62 @@
 <body x-data="{ mobileMenuOpen: false }" class="font-sans antialiased overflow-x-hidden flex min-h-screen">
 
   <!-- Sidebar lateral fijo -->
-  <aside class="hidden lg:flex flex-col w-64 bg-white/30 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
-    <div class="flex flex-col items-center py-6 space-y-4">
+  <aside class="hidden lg:flex flex-col w-64 bg-black/20 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
+    <div class="flex flex-col items-center py-1 space-y-4">
       <x-logo-nutrisol size="80" />
-      <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100">SAMI</h1>
-      <span class="text-center text-sm text-gray-700 dark:text-gray-300 px-4">
-        Sistema de Administración de Menús e Insumos
-      </span>
+      <div class="flex flex-col items-center py-1 space-y-4">
+        @php
+            $user = Auth::user();
+            $photo = $user && $user->profile_photo_path
+                ? asset($user->profile_photo_path)
+                : asset('img/default-user.png');
+        @endphp
+      
+        <!-- Imagen del usuario o avatar por defecto -->
+        <img src="{{ $photo }}"
+             alt="Foto de perfil"
+             class="w-48 h-64 rounded-full object-cover shadow-md border border-white/40 dark:border-gray-700">
+      </div>
     </div>
 
-    <nav class="flex-1 mt-6 space-y-2 px-4 text-gray-800 dark:text-gray-200">
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800" data-url="{{ route('home') }}">🏠 Home</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}">🧑‍⚕️ Pacientes</a>
+    <nav class="flex-1 mt-6 space-y-2 px-4 text-gray-50 dark:text-gray-50">
+            <!-- Dropdown usuario -->
+            <div x-data="{ open: false }" class="relative">
+              <button @click="open = !open" class="w-full flex text-xl items-center font-bold justify-center px-4 py-2 rounded hover:bg-gray-200/20 dark:hover:bg-gray-800">
+                
+                <span class="text-gray-50 dark:text-gray-50 uppercase">👤 {{ Auth::user()->name ?? 'Usuario' }}</span>
+                
+              </button>
+              
+              <div x-show="open" @click.away="open = false" x-transition
+                   class="absolute left-0 mt-2 w-full bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg z-50">
+                <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Perfil</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Configuración</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Modo Oscuro</a>
+                <hr class="border-gray-200 dark:border-gray-700" />
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    Cerrar sesión
+                  </button>
+                </form>
+              </div>
+            </div>
+      <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('home') }}">🏠 Home</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}">🧑‍⚕️ Pacientes</a>
 
       @auth
         @if (Auth::user()->is_admin)
-          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}">👥 Usuarios</a>
+          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}">👥 Usuarios</a>
         @endif
       @endauth
 
-      <hr class="border-gray-300 dark:border-gray-600 my-3" />
+      <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
 
-      <!-- Dropdown usuario -->
-      <div x-data="{ open: false }" class="relative">
-        <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-800">
-          <span class="text-gray-800 dark:text-gray-200">{{ Auth::user()->name ?? 'Usuario' }}</span>
-          <i class="fa-solid fa-user text-gray-500"></i>
-        </button>
 
-        <div x-show="open" @click.away="open = false" x-transition
-             class="absolute left-0 mt-2 w-full bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg z-50">
-          <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Perfil</a>
-          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Configuración</a>
-          <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Modo Oscuro</a>
-          <hr class="border-gray-200 dark:border-gray-700" />
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-              Cerrar sesión
-            </button>
-          </form>
-        </div>
-      </div>
     </nav>
   </aside>
 
@@ -104,7 +116,7 @@
 
     <!-- Main dinámico -->
     <main id="main-content" class="flex-1 p-8 mt-4 rounded-2xl backdrop-blur-md fade-in show">
-      <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-gray-200">
+      <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-gray-50">
         Bienvenido a Mis Menús
       </h1>
       <p class="text-center text-gray-500 mt-2">

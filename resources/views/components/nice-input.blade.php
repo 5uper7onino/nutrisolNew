@@ -20,6 +20,7 @@
                    peer-[&:not(:placeholder-shown)]:bg-white/0 dark:peer-[&:not(:placeholder-shown)]:bg-black/50
                    peer-focus:bg-white/60 dark:peer-focus:bg-black/50
                    peer-[&:not(:placeholder-shown)]:px-1.5 peer-focus:px-1.5 peer-[&:not(:placeholder-shown)]:rounded-md peer-focus:rounded-md backdrop-blur-sm"
+            autocomplete="off"
         >
             {{ $label }}
         </label>

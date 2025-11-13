@@ -41,8 +41,9 @@
         {{-- Columna izquierda con inputs --}}
         <div class="flex-1 space-y-2">
             <div class="flex items-center space-x-1">
-                <x-nice-input type="text" name="name" label="Nombre" :value="$usuario->name ?? ''" placeholder="Nombre completo" width="2/3" required />
-                <x-nice-input type="text" name="email" label="Email" :value="$usuario->email ?? ''" placeholder="Correo electrónico" required width="2/3"/>
+                <x-nice-input type="text" name="name" label="Nombre" :value="$usuario->name ?? ''" placeholder="Nombre completo" width="2/3" required  />
+                <input type="text" name="fake_email" id="fake_email" style="display:none" autocomplete="off">
+                <x-nice-input type="email" name="email" label="Email" :value="$usuario->email ?? ''" placeholder="Correo electrónico" required width="2/3" autocomplete="off"/>
             </div>
 
             <div class="flex items-center space-x-1">
