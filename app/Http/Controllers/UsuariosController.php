@@ -127,29 +127,29 @@ class UsuariosController extends Controller
 
         // 🔹 Manejo de imagen
         if ($request->hasFile('profile_photo')) {
-            // Borramos la anterior si existe
-            if ($usuario->profile_photo_path && Storage::exists($usuario->profile_photo_path)) {
-                Storage::delete($usuario->profile_photo_path);
-            }
+            $file = $request->file('profile_photo');
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file->getRealPath())->cover(800, 800);
+    
+            // Carpeta y nombre del archivo
+            $folder = "users/{$usuario->id}";
+            $filename = uniqid('user_') . '.jpg';
+            $relativePath = "$folder/$filename";
+    
+            // Crear la carpeta si no existe
+            Storage::makeDirectory($folder);
+    
+            // Guardar la imagen dentro de storage/app/public/
+            Storage::disk('public')->put($relativePath, (string) $image->encode(new JpegEncoder(quality: 80)));
+    
+            // Guardar la ruta accesible públicamente
+            //$usuario->profile_photo_path = "storage/$relativePath";
+            $usuario->profile_photo_path = "storage/users/{$usuario->id}/{$filename}";
 
-            $image = $request->file('profile_photo');
-            $fileName = uniqid('user_') . '.' . $image->getClientOriginalExtension();
-
-            // 🔹 Comprimir con Intervention Image
-            $img = Image::make($image)
-                ->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })
-                ->encode(null, 75); // calidad 75%
-
-            $path = "users/{$fileName}";
-            Storage::put($path, (string) $img);
-
-            $usuario->profile_photo_path = $path;
+            $usuario->save();
+    
         }
 
-        $usuario->save();
 
         return response()->json([
             'success' => true,

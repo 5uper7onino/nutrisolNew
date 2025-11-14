@@ -30,7 +30,7 @@
 <body x-data="{ mobileMenuOpen: false }" class="font-sans antialiased overflow-x-hidden flex min-h-screen">
 
   <!-- Sidebar lateral fijo -->
-  <aside class="hidden lg:flex flex-col w-64 bg-black/20 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
+  <aside class="hidden lg:flex flex-col w-64 bg-black/10 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
     <div class="flex flex-col items-center py-1 space-y-4">
       <x-logo-nutrisol size="80" />
       <div class="flex flex-col items-center py-1 space-y-4">
@@ -72,19 +72,17 @@
               </div>
             </div>
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('home') }}">🏠 Home</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home">🏠 Home</a>
       <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}">🧑‍⚕️ Pacientes</a>
-
       @auth
         @if (Auth::user()->is_admin)
           <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}">👥 Usuarios</a>
         @endif
       @endauth
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
 
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
-
 
     </nav>
   </aside>
@@ -116,12 +114,7 @@
 
     <!-- Main dinámico -->
     <main id="main-content" class="flex-1 p-8 mt-4 rounded-2xl backdrop-blur-md fade-in show">
-      <h1 class="text-3xl font-semibold text-center text-gray-700 dark:text-gray-50">
-        Bienvenido a Mis Menús
-      </h1>
-      <p class="text-center text-gray-500 mt-2">
-        Haz clic en <strong>Home</strong> o en otro módulo para cargar contenido.
-      </p>
+
     </main>
 
     <!-- Footer -->

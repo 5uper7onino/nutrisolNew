@@ -59,7 +59,7 @@
         {{-- Imagen del usuario --}}
     <div
         x-data="{
-            preview: '{{ $usuario && $usuario->profile_photo_path ? Storage::url($usuario->profile_photo_path) : '' }}',
+            preview: '{{ $usuario && $usuario->profile_photo_path ? asset($usuario->profile_photo_path) : '' }}',
             selectImage() {
                 this.$refs.fileInput.click()
             },

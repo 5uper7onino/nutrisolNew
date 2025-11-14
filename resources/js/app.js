@@ -9,4 +9,5 @@ document.addEventListener("DOMContentLoaded", () => {
     enableDynamicLoading();
     initAjaxForms();
     initUsuarios();
+    document.querySelector('#home').click();
 })
