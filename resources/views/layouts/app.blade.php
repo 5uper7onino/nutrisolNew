@@ -92,24 +92,35 @@
     <!-- Header móvil -->
     <header class="bg-white/70 backdrop-blur-md shadow sticky top-0 z-30 lg:hidden flex justify-between items-center px-4 py-4">
       <div class="flex items-center space-x-3">
-        <x-logo-dif-gobierno size="64" />
-        <h1 class="text-2xl font-semibold">SAMI</h1>
+        <x-logo-nutrisol size="64" />
       </div>
       <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-2xl">☰</button>
     </header>
 
     <!-- Menú móvil -->
     <nav x-show="mobileMenuOpen" x-transition
-         class="fixed inset-0 bg-white bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6 lg:hidden">
-      <button @click="mobileMenuOpen = false" class="absolute top-6 right-6 text-2xl">✕</button>
-      <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('home') }}">Home</a>
-      <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('menus') }}">Menús</a>
-      <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('productos') }}">Productos</a>
+      class="absolute right-4 top-16 w-48 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg py-3 space-y-2 z-40 lg:hidden">
+      <a href="#" @click="mobileMenuOpen = false"
+          class="menu-link block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          data-url="{{ route('home') }}">
+          🏠 Home
+      </a>
+      
+      <a href="#" @click="mobileMenuOpen = false"
+          class="menu-link block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+          data-url="{{ route('pacientes.index') }}">
+          🧑‍⚕️ Pacientes
+      </a>
       @auth
         @if (Auth::user()->is_admin)
-          <a href="#" class="menu-link text-xl text-gray-800 hover:text-primary" data-url="{{ route('usuarios') }}">Usuarios</a>
+          <a href="#" @click="mobileMenuOpen = false"
+              class="menu-link block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              data-url="{{ route('usuarios') }}">
+            👥 Usuarios
+          </a>
         @endif
       @endauth
+   
     </nav>
 
     <!-- Main dinámico -->
