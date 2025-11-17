@@ -88,7 +88,8 @@
   </aside>
 
   <!-- Contenido principal -->
-  <div class="flex-1 lg:ml-64 flex flex-col">
+  <div class="w-full lg:ml-64 flex flex-col overflow-hidden">
+
     <!-- Header móvil -->
     <header class="bg-white/70 backdrop-blur-md shadow sticky top-0 z-30 lg:hidden flex justify-between items-center px-4 py-4">
       <div class="flex items-center space-x-3">
@@ -124,7 +125,7 @@
     </nav>
 
     <!-- Main dinámico -->
-    <main id="main-content" class="flex-1 p-8 mt-4 rounded-2xl backdrop-blur-md fade-in show">
+    <main id="main-content" class="flex-1 p-0 lg:p-8 mt-4 rounded-2xl backdrop-blur-md fade-in show">
 
     </main>
 
