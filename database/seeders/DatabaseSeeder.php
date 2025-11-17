@@ -27,16 +27,22 @@ class DatabaseSeeder extends Seeder
             MenusSeeder::class,
             SucursalesSeeder::class,
             ProductosSeeder::class,
+            EdoCivilSeeder::class,
+            OcupacionesSeeder::class,
+            EscolaridadSeeder::class,
+            PadecimientosSeeder::class,
+            CirugiaTiposSeeder::class,
         ]);
 
                 User::firstOrCreate(
             ['email' => 'test@example.com'],
             [
-                'name' => 'Test User',
+                'name' => 'Isis Marisol Montañez Cerda',
                 'password' => Hash::make('password'),
                 'is_admin' => true,
                 'sucursal_id' => 1,
                 'email_verified_at' => now(),
+                'profile_photo_path' => 'storage/users/1/soli.jpg',
             ]
         );
     }

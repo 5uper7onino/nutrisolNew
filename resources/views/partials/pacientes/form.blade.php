@@ -36,57 +36,69 @@
 >
 @csrf
 
-<div class="flex flex-wrap gap-x-6">
+<div x-data="{ tab: 'datos' }" class="mt-6">
 
-    <x-input-number type="text" name="nombre" label="Nombre" :value="$paciente->nombre ?? ''" placeholder="Nombre del Paciente" width="w-full sm:w-1/2 lg:w-1/5" required />
-    <x-input-number type="text" name="apellido_paterno" label="Apellido Paterno" :value="$paciente->apellido_paterno ?? ''" placeholder="Apellido Paterno" width="w-full sm:w-1/2 lg:w-1/5" required />
-    <x-input-number type="text" name="apellido_materno" label="Apellido Materno" :value="$paciente->apellido_materno ?? ''" placeholder="Apellido Materno" width="w-full sm:w-1/2 lg:w-1/5" required />
-    <x-input-number type="text" name="apellido_paterno" label="Apellido Paterno" :value="$paciente->apellido_paterno ?? ''" placeholder="Apellido Paterno" width="w-full sm:w-1/2 lg:w-1/5" required />
+    <!-- NAV TABS -->
+    <div class="flex border-b border-gray-300 dark:border-gray-700">
 
-</div>
+        <!-- TAB: DATOS PERSONALES -->
+        <button 
+            @click="tab = 'datos'"
+            type="button"
+            :class="tab === 'datos' 
+                ? 'border-orange-500 text-orange-600 font-bold' 
+                : 'border-transparent text-gray-500'"
+            class="px-6 py-3 border-b-4 transition font-semibold text-xl">
+            Datos Personales
+        </button>
 
-<div class="flex flex-wrap gap-x-6">
-    <x-input-number type="text" name="curp" label="CURP" :value="$paciente->curp ?? ''" placeholder="CURP" width="w-full sm:w-1/2 lg:w-1/5" required />
-    <x-input-number type="date" name="fecha_nacimiento" label="Fecha de Nacimiento" :value="$paciente->fecha_nacimiento ?? ''" placeholder="Fecha de Nacimiento" width="w-full sm:w-1/2 lg:w-1/5" required />
-    <x-input-number type="text" name="telefono" label="Teléfono" :value="$paciente->telefono ?? ''" placeholder="Teléfono" width="w-full sm:w-1/2 lg:w-1/5" required />
-</div>
-
-<div class="flex flex-wrap gap-x-6">
-    <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
-        <label class="block font-semibold text-gray-200 mb-1">Estado civil</label>
-        <select
-            name="estado_civil"
-            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-        >
-            <option value="" disabled {{ empty($paciente->estado_civil) ? 'selected' : '' }}>Seleccione</option>
-            <option value="soltero" {{ (isset($paciente) && $paciente->estado_civil == 'soltero') ? 'selected' : '' }}>Soltero(a)</option>
-            <option value="casado" {{ (isset($paciente) && $paciente->estado_civil == 'casado') ? 'selected' : '' }}>Casado(a)</option>
-            <option value="viudo" {{ (isset($paciente) && $paciente->estado_civil == 'viudo') ? 'selected' : '' }}>Viudo(a)</option>
-            <option value="divorciado" {{ (isset($paciente) && $paciente->estado_civil == 'divorciado') ? 'selected' : '' }}>Divorciado(a)</option>
-        </select>
+        <!-- TAB: ANTECEDENTES -->
+        <button 
+            @click="tab = 'antecedentesPatologicos'"
+            type="button"
+            :class="tab === 'antecedentesPatologicos'
+                ? 'border-orange-500 text-orange-600 font-bold' 
+                : 'border-transparent text-gray-500'"
+            class="px-6 py-3 border-b-4 transition font-semibold text-xl">
+            Antecedentes Patológicos
+        </button>
+        <!-- TAB: ANTECEDENTES NO PATOLÓGICOS-->
+        <button 
+            @click="tab = 'antecedentesNoPatologicos'"
+            type="button"
+            :class="tab === 'antecedentesNoPatologicos'
+                ? 'border-orange-500 text-orange-600 font-bold' 
+                : 'border-transparent text-gray-500'"
+            class="px-6 py-3 border-b-4 transition font-semibold text-xl">
+            Antecedentes No Patológicos
+        </button>
     </div>
 
-    <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
-        <label class="block font-semibold text-gray-200 mb-1">Ocupación</label>
-        <input
-            type="text"
-            name="ocupacion"
-            value="{{ $paciente->ocupacion ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-            placeholder="Ocupación actual"
-        >
+    <!-- CONTENIDO TAB: DATOS PERSONALES -->
+    <div x-show="tab === 'datos'" x-transition.opacity>
+        <!-- AQUÍ PEGAS TODA TU SECCIÓN COMPLETA DE DATOS PERSONALES -->
+        <input type="hidden" name="sucursal_id" value="{{ Auth::user()->sucursal_id }}">
+
+        @include('partials.pacientes._personales')
+        
     </div>
 
-    <div class="w-1/3 backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
-        <label class="block font-semibold text-gray-200 mb-1">Fecha de inicio de tratamiento</label>
-        <input
-            type="date"
-            name="fecha_inicio_tratamiento"
-            value="{{ $paciente->fecha_inicio_tratamiento ?? '' }}"
-            class="w-full border rounded-lg px-3 py-2 ring-none border-none outline-0 focus:ring-1 focus:ring-orange-500 backdrop-blur-md bg-white/20 font-bold"
-        >
+    <!-- CONTENIDO TAB: ANTECEDENTES PATOLÓGICOS -->
+    <div x-show="tab === 'antecedentesPatologicos'" x-transition.opacity>
+
+        @include('partials.pacientes._antecedentes_patologicos')
+    </div>
+
+    <!-- CONTENIDO TAB: ANTECEDENTES NO PATOLÓGICOS -->
+    <div x-show="tab === 'antecedentesNoPatologicos'" x-transition.opacity>
+
+        @include('partials.pacientes._antecedentes_no_patologicos')
     </div>
 </div>
+
+
+
+
 
 <div class="backdrop-blur-md bg-black/10 font-bold p-2 rounded-lg">
     <label class="block font-semibold text-gray-200 mb-1">Motivo de consulta</label>
@@ -103,3 +115,21 @@
 </div>
 
 </form>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('padecimientos');
+
+    if (el) {
+        new TomSelect(el, {
+            plugins: ['remove_button'],
+            persist: true,
+            create: false,
+            maxItems: null,
+            closeAfterSelect: false,
+            hideSelected: true,
+            allowEmptyOption: false,
+        });
+    }
+});
+
+</script>

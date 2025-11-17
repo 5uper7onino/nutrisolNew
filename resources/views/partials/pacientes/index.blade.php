@@ -43,7 +43,8 @@
                                 onclick="window.dispatchEvent(new CustomEvent('open-modal', {
                                     detail: {
                                         title: 'Editar Paciente',
-                                        url: '{{ route('pacientes.edit', $paciente->id) }}'
+                                        url: '{{ route('pacientes.edit', $paciente->id) }}',
+                                        maxWidth:'max-w-8xl'
                                     }
                                 }))"
                             >

@@ -21,7 +21,13 @@ export function enableDynamicLoading(containerSelector = 'body', mainSelector = 
                     headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 });
 
-                if (!response.ok) throw new Error(`Error al cargar la vista (${response.status})`);
+                if (!response.ok){
+                    if (response.status === 401) {
+                        window.location.href = '/login';
+                        return;
+                    }
+                    throw new Error(`Error al cargar la vista (${response.status})`);
+                } 
                 const html = await response.text();
                 main.innerHTML = html;
 

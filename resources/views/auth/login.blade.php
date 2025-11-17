@@ -7,7 +7,7 @@
         <x-validation-errors class="mb-4" />
 
         @session('status')
-            <div class="mb-4 font-medium text-sm sdfsdfsdfdsfdsfsdfdsdf text-green-600">
+            <div class="mb-4 font-medium text-green-600">
                 {{ $value }}
             </div>
         @endsession
@@ -15,13 +15,13 @@
             @csrf
 
             <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-label for="email" class="text-2xl font-semibold" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full text-2xl" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                <x-label for="password" class="text-2xl font-semibold" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full text-2xl" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">

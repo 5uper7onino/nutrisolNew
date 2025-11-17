@@ -9,7 +9,7 @@
 
   <style>
     html {
-      background-image: url("{{ asset('img/salad-1672505.webp') }}");
+      background-image: url("{{ asset('img/pexels-badulescu.jpg') }}");
       background-size: cover;
     }
     .fade-in {

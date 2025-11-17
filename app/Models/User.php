@@ -31,6 +31,13 @@ class User extends Authenticatable
         'is_admin',
         'sucursal_id',
         'password',
+        'profile_photo_path',
+        'estado_civil_id',
+        'escolaridad_id',
+        'telefono',
+        'direccion',
+        
+
     ];
 
     /**

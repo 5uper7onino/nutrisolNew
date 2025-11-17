@@ -19,8 +19,9 @@ class CreatePacientesTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('email')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('municipio')->nullable();
-            $table->string('estado')->nullable();
+            $table->string('municipio_id')->nullable();
+            $table->string('estado_id')->nullable();
+            $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
     }

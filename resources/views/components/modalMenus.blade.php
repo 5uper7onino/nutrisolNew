@@ -28,12 +28,12 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
 >
     <div
     x-bind:class="[
-        'border-4 border-orange-600 rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full p-6 relative ',
+        'border-4 border-orange-600 rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full p-6 relative h-[80%] overflow-y-auto',
         width === 'max-w-sm' ? 'max-w-sm' :
         width === 'max-w-md' ? 'max-w-md' :
         width === 'max-w-lg' ? 'max-w-lg' :
         width === 'max-w-7xl' ? 'max-w-7xl' :
-        width === 'max-w-8xl' ? 'max-w-[70%]' :
+        width === 'max-w-8xl' ? 'max-w-[80%]' :
         width === 'full' ? 'w-full h-full' : 'max-w-3xl'
     ]">
     <!--style="background-image: url('{{asset("img/Blog-antiguo-1024x738-3.jpg")}}'); background-size: cover; background-position: center; backdrop-filter: blur(10px)"-->

@@ -5,6 +5,7 @@
             name="{{ $name }}"
             id="{{ $name }}"
             value="{{ old($name, $value ?? '') }}"
+            {{ $attributes->merge(['x-model' => $attributes->get('x-model') ?? null]) }}
             placeholder=" "
             class="peer w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 pt-3 pb-0 text-2xl text-gray-800 dark:text-gray-100 outline-none
                    focus:border-orange-500 focus:ring-0

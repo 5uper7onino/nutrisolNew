@@ -18,7 +18,7 @@
         @livewireStyles
     <style>
         #app { /* .login-background { */
-        background-image: url('{{asset('img/bg_alimentaria.webp')}}');
+        background-image: url('{{asset('img/pexels-badulescu.jpg')}}');
         background-size: cover;
         background-repeat: no-repeat;
         height: 100vh;

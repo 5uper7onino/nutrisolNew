@@ -10,7 +10,7 @@ use Intervention\Image\Encoders\JpegEncoder;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Sucursal;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class UsuariosController extends Controller
 {
