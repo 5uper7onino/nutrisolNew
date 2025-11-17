@@ -100,14 +100,6 @@
                 <x-nice-input type="text" name="direccion" label="Dirección"
                     width="w-full sm:w-1/2 lg:w-[30%]"
                     :value="$paciente->direccion ?? ''" />
-                <x-nice-select label="Municipio" name="municipio_id"
-                    width="w-full sm:w-1/2 lg:w-[30%]"
-                    :options="$municipios"
-                    :selected="$paciente->municipio_id ?? null" />
-                <x-nice-select label="Estado" name="estado_id"
-                    width="w-full sm:w-1/2 lg:w-[30%]"
-                    :options="$estados"
-                    :selected="$paciente->estado_id ?? null" />
 
                 <x-nice-input type="date" name="fecha_inicio" label="Inicio"
                     width="w-full sm:w-1/2 lg:w-[30%]"
