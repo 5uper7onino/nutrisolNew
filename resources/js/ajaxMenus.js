@@ -27,12 +27,10 @@ export function enableDynamicLoading(containerSelector = 'body', mainSelector = 
                         return;
                     }
                     throw new Error(`Error al cargar la vista (${response.status})`);
-                } 
+                }
                 const html = await response.text();
                 main.innerHTML = html;
                 if (typeof initFullCalendar === 'function') initFullCalendar();
-
-                initFullCalendar();
                 // 🔹 Si existen inicializadores específicos, se ejecutan
                 if (typeof window.initUsuarios === 'function') initUsuarios();
                 if (typeof window.initMenus === 'function') initMenus();

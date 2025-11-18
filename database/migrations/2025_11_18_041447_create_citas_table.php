@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('paciente_id');
+            $table->dateTime('inicio');
+            $table->dateTime('fin')->nullable();
+            $table->string('nota')->nullable();
             $table->timestamps();
         });
     }

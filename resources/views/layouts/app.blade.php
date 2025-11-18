@@ -25,6 +25,8 @@
       border-radius: 20px;
     }
   </style>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body x-data="{ mobileMenuOpen: false }" class="font-sans antialiased overflow-x-hidden flex min-h-screen">

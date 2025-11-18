@@ -50,4 +50,12 @@ Route::middleware(['auth'])->group(function () {
 
     //Citas
     Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
+    Route::get('/citas/create', [CitaController::class, 'create'])->name('citas.create');
+
+    Route::post('/citas', [CitaController::class, 'store'])->name('citas.store');
+    Route::get('/citas/data', [CitaController::class, 'data']);
+    Route::get('/citas/{cita}/confirm-delete', [CitaController::class, 'confirmDelete']);
+    Route::delete('/citas/{cita}', [CitaController::class, 'destroy'])->name('citas.destroy');
+
+
 });

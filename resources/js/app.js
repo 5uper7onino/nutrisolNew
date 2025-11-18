@@ -53,3 +53,36 @@ window.initTomSelect = () => {
         }
     });
 };
+
+window.eliminarCita = async function(id) {
+    console.log("Eliminando cita con ID:", id);
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+
+    const confirmDelete = confirm("¿Seguro que quieres eliminar esta cita?");
+    if (!confirmDelete) return;
+
+    try {
+        const response = await fetch(`/citas/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': token,
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("No se pudo eliminar");
+        }
+
+        // Si usas fullcalendar como window.calendario
+        if (window.calendario) {
+            window.calendario.refetchEvents();
+        }
+
+        // Cerrar modal (si tienes un evento para eso)
+        window.dispatchEvent(new CustomEvent('close-modal'));
+
+    } catch (e) {
+        alert("Error al eliminar: " + e.message);
+    }
+};

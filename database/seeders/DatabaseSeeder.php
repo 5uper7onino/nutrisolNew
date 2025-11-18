@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             EscolaridadSeeder::class,
             PadecimientosSeeder::class,
             CirugiaTiposSeeder::class,
+            CitasSeeder::class,
         ]);
 
                 User::firstOrCreate(
