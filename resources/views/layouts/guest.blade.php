@@ -18,7 +18,7 @@
         @livewireStyles
     <style>
         #app { /* .login-background { */
-        background-image: url('{{asset('img/pexels-badulescu.jpg')}}');
+        background-image: url('{{asset('img/pexels-badulescu.webp')}}');
         background-size: cover;
         background-repeat: no-repeat;
         height: 100vh;
