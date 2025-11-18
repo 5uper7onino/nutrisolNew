@@ -1,4 +1,6 @@
 import './bootstrap';
+import '../css/app.css';
+
 //import { initAjaxMenus } from './ajaxMenus';
 import { enableDynamicLoading } from './ajaxMenus';
 import { initAjaxForms,initUsuarios } from './ajaxForms';
@@ -9,7 +11,7 @@ import 'tom-select/dist/css/tom-select.css';
 import 'tom-select/dist/css/tom-select.default.css';
 
 import { initFullCalendar } from './fullcalendar';
-window.initFullCalendar = initFullCalendar; 
+window.initFullCalendar = initFullCalendar;
 
 // Inicializa el calendario si existe el elemento en el DOM
 

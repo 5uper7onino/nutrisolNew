@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nutrisol</title>
-  @vite(['resources/css/app.css','resources/js/app.js'])
+  @vite(['resources/js/app.js'])
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
   <style>
@@ -40,7 +40,7 @@
                 ? asset($user->profile_photo_path)
                 : asset('img/default-user.png');
         @endphp
-      
+
         <!-- Imagen del usuario o avatar por defecto -->
         <img src="{{ $photo }}"
              alt="Foto de perfil"
@@ -52,11 +52,11 @@
             <!-- Dropdown usuario -->
             <div x-data="{ open: false }" class="relative">
               <button @click="open = !open" class="w-full flex text-xl items-center font-bold justify-center px-4 py-2 rounded hover:bg-gray-200/20 dark:hover:bg-gray-800">
-                
+
                 <span class="text-gray-50 dark:text-gray-50 uppercase">👤 {{ Auth::user()->name ?? 'Usuario' }}</span>
-                
+
               </button>
-              
+
               <div x-show="open" @click.away="open = false" x-transition
                    class="absolute left-0 mt-2 w-full bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-lg z-50">
                 <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Perfil</a>
@@ -107,7 +107,7 @@
           data-url="{{ route('home') }}">
           🏠 Home
       </a>
-      
+
       <a href="#" @click="mobileMenuOpen = false"
           class="menu-link block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
           data-url="{{ route('pacientes.index') }}">
@@ -122,7 +122,7 @@
           </a>
         @endif
       @endauth
-   
+
     </nav>
 
     <!-- Main dinámico -->
