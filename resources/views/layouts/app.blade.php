@@ -72,15 +72,16 @@
               </div>
             </div>
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home">🏠 Home</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}">🧑‍⚕️ Pacientes</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home">🏠 Home</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}">🧑‍⚕️ Pacientes</a>
       @auth
         @if (Auth::user()->is_admin)
-          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}">👥 Usuarios</a>
+          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}">👥 Usuarios</a>
         @endif
       @endauth
-      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
-      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
+      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-4xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}">🍅 Citas</a>
 
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
 

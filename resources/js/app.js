@@ -8,6 +8,11 @@ import TomSelect from 'tom-select';
 import 'tom-select/dist/css/tom-select.css';
 import 'tom-select/dist/css/tom-select.default.css';
 
+import { initFullCalendar } from './fullcalendar';
+window.initFullCalendar = initFullCalendar; 
+
+// Inicializa el calendario si existe el elemento en el DOM
+
 
 document.addEventListener("DOMContentLoaded", () => {
     enableDynamicLoading();

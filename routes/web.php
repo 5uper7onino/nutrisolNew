@@ -6,7 +6,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PacienteController;
-
+use App\Http\Controllers\CitaController;
 // Si no hay usuario autenticado → mandar al login
 Route::get('/', function () {
     return redirect()->route('login');
@@ -47,4 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Pacientes
     Route::resource('pacientes', PacienteController::class);
+
+    //Citas
+    Route::get('/citas', [CitaController::class, 'index'])->name('citas.index');
 });

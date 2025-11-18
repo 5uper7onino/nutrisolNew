@@ -30,7 +30,9 @@ export function enableDynamicLoading(containerSelector = 'body', mainSelector = 
                 } 
                 const html = await response.text();
                 main.innerHTML = html;
+                if (typeof initFullCalendar === 'function') initFullCalendar();
 
+                initFullCalendar();
                 // 🔹 Si existen inicializadores específicos, se ejecutan
                 if (typeof window.initUsuarios === 'function') initUsuarios();
                 if (typeof window.initMenus === 'function') initMenus();
