@@ -17,7 +17,10 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
         content = 'Cargando...';
         fetch($event.detail.url)
             .then(res => res.text())
-            .then(html => content = html)
+            .then(html => {
+                content = html; 
+                setTimeout(() => initTomSelect(), 50);
+            })
             .catch(() => content = '<p class=\'text-red-500\'>Error al cargar contenido.</p>');
     "
     x-show="open"
@@ -28,28 +31,26 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
 >
     <div
     x-bind:class="[
-        'border-4 border-orange-600 rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full p-6 relative h-[80%] overflow-y-auto',
-        width === 'max-w-sm' ? 'max-w-sm' :
-        width === 'max-w-md' ? 'max-w-md' :
-        width === 'max-w-lg' ? 'max-w-lg' :
-        width === 'max-w-7xl' ? 'max-w-7xl' :
-        width === 'max-w-8xl' ? 'max-w-[80%]' :
+        'border md:border-4 border-orange-600 md:rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full md:p-6 m-0 relative md:h-[80%] overflow-y-auto h-full ',
+        width === 'max-w-sm' ? 'w-full md:max-w-sm' :
+        width === 'max-w-md' ? 'w-full md:max-w-md' :
+        width === 'max-w-lg' ? 'w-full md:max-w-lg' :
+        width === 'max-w-7xl' ? 'w-full md:max-w-7xl' :
+        width === 'max-w-8xl' ? 'w-full md:max-w-[80%]' :
         width === 'full' ? 'w-full h-full' : 'max-w-3xl'
     ]">
-    <!--style="background-image: url('{{asset("img/Blog-antiguo-1024x738-3.jpg")}}'); background-size: cover; background-position: center; backdrop-filter: blur(10px)"-->
-
+        <div class="flex justify-between items-center sticky top-0 bg-orange-600 md:bg-transparent backdrop-blur-lg z-10">
+            <h2 class="text-2xl font-semibold text-gray-100 md:text-orange-700" x-text="title"></h2>
             <button
                 @click="open = false"
-                class="absolute top-3 right-3 text-orange-700 hover:text-red-600 text-4xl font-bold leading-none"
+                class=" text-orange-100 md:text-orange-700 hover:text-red-600 font-bold text-4xl"
             >
                 &times;
             </button>
+        </div>
 
 
-
-            <h2 class="text-2xl font-semibold text-orange-700 mb-4" x-text="title"></h2>
-
-            <div x-html="content"></div>
+            <div x-html="content" x-init="$nextTick(() => window.initTomSelect())"></div>
         </div>
 
 </div>

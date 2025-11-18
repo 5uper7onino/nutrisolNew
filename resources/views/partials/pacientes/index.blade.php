@@ -7,6 +7,7 @@
                 detail: {
                     title: 'Nuevo Paciente',
                     url: '{{ route('pacientes.create') }}',
+                    maxWidth: 'max-w-8xl'
                 }
             }))"
         >
@@ -37,7 +38,8 @@
                                 onclick="window.dispatchEvent(new CustomEvent('open-modal', {
                                     detail: {
                                         title: 'Editar Paciente',
-                                        url: '{{ route('pacientes.edit', $paciente->id) }}'
+                                        url: '{{ route('pacientes.edit', $paciente->id) }}',
+                                        maxWidth: 'max-w-8xl'
                                     }
                                 }))"
                             >Editar</button>
@@ -69,7 +71,8 @@
                         onclick="window.dispatchEvent(new CustomEvent('open-modal', {
                             detail: {
                                 title: 'Editar Paciente',
-                                url: '{{ route('pacientes.edit', $paciente->id) }}'
+                                url: '{{ route('pacientes.edit', $paciente->id) }}',
+                                maxWidth: 'max-w-8xl'
                             }
                         }))"
                     >

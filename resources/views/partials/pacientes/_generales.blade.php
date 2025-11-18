@@ -14,8 +14,8 @@
                         if (file) this.preview = URL.createObjectURL(file);
                     }
                 }"
-                class="relative w-56 h-72 rounded-xl border-2 border-dashed border-gray-400 dark:border-gray-600
-                    flex flex-col items-center justify-center text-gray-400 dark:text-gray-200 cursor-pointer
+                class="relative w-48 h-64 rounded-xl border-2 border-dashed border-gray-400 dark:border-gray-600
+                    flex flex-col justify-center text-gray-400 dark:text-gray-200 cursor-pointer
                     hover:border-orange-500 hover:text-orange-500 transition-all backdrop-blur-md bg-white/20 dark:bg-black/30"
                 @click="selectImage">
 
@@ -43,7 +43,7 @@
         <div class="order-2 lg:order-1 lg:col-span-5">
 
             <!-- PRIMERA FILA: ahora sí entran 4 si quieres -->
-            <div class="flex flex-wrap gap-x-4">
+            <div class="row flex flex-wrap gap-x-4">
                 <x-nice-input width="w-full sm:w-1/2 lg:w-[30%]"
                     type="text" name="nombre" label="Nombre"
                     :value="$paciente->nombre ?? ''"
@@ -61,12 +61,12 @@
             </div>
 
             <!-- SIGUIENTES FILAS IGUAL QUE TENÍAS -->
-            <div class="flex flex-wrap gap-x-4 mt-4">
+            <div class="row flex flex-wrap gap-x-4 mt-4">
                 <x-nice-input width="w-full sm:w-1/2 lg:w-[30%]"
                     type="text" name="curp" label="CURP"
                     :value="$paciente->curp ?? ''" required />
 
-                <x-nice-input type="date" name="fecha_nacimiento" label="Fecha de Nacimiento"
+                <x-nice-input type="date" name="fecha_nacimiento" label="Nacimiento"
                     width="w-full sm:w-1/2 lg:w-[30%]"
                     :value="$paciente->fecha_nacimiento ?? ''" required />
 
@@ -75,7 +75,7 @@
                     :value="$paciente->telefono ?? ''" required />
             </div>
 
-            <div class="flex flex-wrap gap-x-4 mt-4">
+            <div class="row flex flex-wrap gap-x-4 mt-4">
                 <x-nice-select label="Estado Civil" name="estado_civil_id"
                     width="w-full sm:w-1/2 lg:w-[30%]"
                     :options="$estado_civiles"
@@ -92,7 +92,7 @@
                     :selected="$paciente->escolaridad_id ?? null" />
             </div>
 
-            <div class="flex flex-wrap gap-x-4 mt-4">
+            <div class="row flex flex-wrap gap-x-4 mt-4">
 
                 <x-nice-input type="email" name="email" label="Correo Electrónico"
                     width="w-full sm:w-1/2 lg:w-[30%]"
@@ -104,26 +104,28 @@
                 <x-nice-input type="date" name="fecha_inicio" label="Inicio"
                     width="w-full sm:w-1/2 lg:w-[30%]"
                     :value="$paciente->fecha_inicio ?? ''" />
-                    <select 
-                        id="padecimientos"
-                        name="padecimientos[]" 
-                        multiple
-                        placeholder="Selecciona uno o varios..."
-                        class="w-full sm:w-1/2 lg:w-3/4"
+
+            </div>
+            <select 
+                id="padecimientos"
+                name="padecimientos[]"
+                multiple
+                placeholder="Selecciona uno o varios..."
+                class="tom tom-custom w-full sm:w-1/2 lg:w-3/4"
+            >
+                @foreach ($padecimientos as $p)
+                    <option 
+                        value="{{ $p->id }}"
+                        @if(isset($paciente) && $paciente->padecimientos->contains($p->id)) selected @endif
                     >
-                        @foreach ($padecimientos as $p)
-                            <option 
-                                value="{{ $p->id }}"
-                                @if(isset($paciente) && $paciente->padecimientos->contains($p->id)) selected @endif
-                            >
-                                {{ $p->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
+                        {{ $p->nombre }}
+                    </option>
+                @endforeach
+            </select>
+        
 
                 
-            </div>
-
         </div>
+
     </div>
 </div>

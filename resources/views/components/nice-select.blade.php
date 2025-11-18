@@ -36,7 +36,7 @@
     $xModelAttr = $hasXModel ? $attributes->get('x-model') : null;
 @endphp
 
-<div class="w-{{ $width ?? '1/3' }} relative p-2 rounded-lg" x-data>
+<div class="w-ful md:w-{{ $width ?? '1/3' }} relative p-2 rounded-lg" x-data>
     <div class="relative">
         <select
             name="{{ $name }}"

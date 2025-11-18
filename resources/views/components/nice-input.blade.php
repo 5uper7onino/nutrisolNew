@@ -1,4 +1,4 @@
-<div class="w-{{ $width ?? '1/3' }} relative p-2 rounded-lg">
+<div class="w-full md:w-{{ $width ?? '1/3' }} relative p-2 rounded-lg">
     <div class="relative">
         <input
             type="{{ $type }}"

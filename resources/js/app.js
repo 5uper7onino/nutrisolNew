@@ -15,3 +15,34 @@ document.addEventListener("DOMContentLoaded", () => {
     initUsuarios();
     document.querySelector('#home').click();
 })
+
+window.initTomSelect = () => {
+    document.querySelectorAll("select.tom").forEach(select => {
+        if (!select.tomselect) {
+            new TomSelect(select, {
+                plugins: ['remove_button'],
+                persist: false,
+                create: false,
+                maxItems: null,
+                hidePlaceholder: true,
+
+                render: {
+                    item: function(data, escape) {
+                        return `
+                            <div class="ts-item-pill">
+                                ${escape(data.text)}
+                            </div>
+                        `;
+                    },
+                    option: function(data, escape) {
+                        return `
+                            <div class="ts-option-strong">
+                                ${escape(data.text)}
+                            </div>
+                        `;
+                    }
+                }
+            });
+        }
+    });
+};

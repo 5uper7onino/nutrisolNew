@@ -6,3 +6,84 @@
 [x-cloak] {
     display: none;
 }
+
+/* ---------- TAGS SELECCIONADOS (pills) ---------- */
+.ts-item-pill {
+    background: #fb923c; /* Orange-400 */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    margin: 3px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.15);
+}
+
+/* Hover de pill */
+.ts-item-pill:hover {
+    background: #f97316; /* Orange-500 */
+}
+
+/* ---------- OPCIONES DEL DROPDOWN ---------- */
+.ts-option-strong {
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 4px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+}
+
+.ts-option-strong:hover {
+    background: #fed7aa; /* Orange-200 */
+}
+
+/* DARK MODE */
+.dark .ts-option-strong {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+.dark .ts-option-strong:hover {
+    background: rgba(251, 146, 60, 0.4); /* Orange-400 */
+}
+
+/* Ítems dentro del dropdown */
+.tom-custom.ts-dropdown .option {
+    font-size: 1.5rem !important;   /* tamaño de letra */
+    color: #16a34a !important;      /* verde tailwind: green-600 */
+    font-weight: 600;               /* opcional */
+}
+
+/* Ítems seleccionados (tags) */
+.tom-custom.ts-control .item {
+    font-size: 1.5rem !important;
+    background-color: #dcfce7 !important; /* green-100 */
+    color: #166534 !important;            /* green-700 */
+    border: 1px solid #86efac !important; /* green-300 */
+    border-radius: 6px;
+    padding: 3px 6px;
+    font-weight: 600;
+}
+/* DROPDOWN OPTIONS */
+.tom-custom.ts-wrapper .ts-dropdown .option {
+    font-size: 1.2rem !important;
+    color: #16a34a !important;
+    font-weight: 600 !important;
+}
+
+/* ITEMS SELECCIONADOS */
+.tom-custom.ts-wrapper .ts-control .item {
+    font-size: 1.2rem !important;
+    background-color: #dcfce7 !important; /* green-100 */
+    background-image:none !important;
+    color: #166534 !important;            /* green-700 */
+    border: 1px solid #86efac !important; /* green-300 */
+    border-radius: 20px !important;
+    padding: 3px 6px !important;
+    font-weight: 600 !important;
+}
+

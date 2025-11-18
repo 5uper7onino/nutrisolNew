@@ -19,7 +19,7 @@
     }
 @endphp
 
-<div class="w-{{ $width }} relative p-2 rounded-lg">
+<div class=" w-full md:w-{{ $width }} relative p-2 rounded-lg">
     <label
         for="{{ $id }}"
         class="relative flex items-center justify-between border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 bg-white/40 dark:bg-black/30 backdrop-blur-md cursor-pointer transition-colors duration-300 hover:bg-white/60 dark:hover:bg-black/50 hover:border-orange-500"
