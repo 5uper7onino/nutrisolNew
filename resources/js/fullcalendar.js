@@ -10,12 +10,18 @@ export function initFullCalendar(containerId = 'calendar') {
 
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        initialView: 'dayGridMonth',
+        locale:'es',
+        initialView: 'timeGridWeek',
         selectable: true,
         headerToolbar: {
-            left: 'prev,next today',
+            right: 'prev,next,today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            left:''
+        },
+        views: {
+            timeGridWeek: {
+                buttonText: 'Semana'
+            }
         },
 
         // 🔥 Cargar eventos desde Laravel
