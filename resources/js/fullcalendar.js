@@ -10,26 +10,32 @@ export function initFullCalendar(containerId = 'calendar') {
 
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        locale:'es',
+        locale: 'es-Es',
         initialView: 'timeGridWeek',
-        selectable: true,
+        slotMinTime: "08:00:00",
+        slotMaxTime: "19:00:00",
+        slotDuration: "00:30:00",
+        height: "auto",
+        expandRows: true,
+        selectable: true,        // permite seleccionar
+        selectMirror: true,      // ilumina visualmente el slot
+        unselectAuto: true, 
         headerToolbar: {
             right: 'prev,next,today',
             center: 'title',
             left:''
+        },buttonText: {
+            today: 'Hoy',
+            week: 'Semana',
+            day: 'Día',
+            month: 'Mes'
         },
-        views: {
-            timeGridWeek: {
-                buttonText: 'Semana'
-            }
-        },
+        
 
         // 🔥 Cargar eventos desde Laravel
         events: '/citas/data',
 
         // 🔥 Click en fecha -> abrir modal
-        selectable: true,
-        selectMirror: true,
         select: function(info) {
             console.log("INICIO:", info.startStr);
             console.log("FIN:", info.endStr);

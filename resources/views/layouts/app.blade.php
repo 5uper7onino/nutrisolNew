@@ -82,7 +82,7 @@
       @endauth
       <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}"><span class="text-3xl">📋</span> Menús</a>
       <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}"><span class="text-3xl">🍅</span> Productos</a>
-      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}"><span class="text-3xl">🍅</span> Citas</a>
+      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}"><span class="text-3xl">📆</span> Citas</a>
 
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
 
@@ -127,7 +127,7 @@
     </nav>
 
     <!-- Main dinámico -->
-    <main id="main-content" class="flex-1 p-0 lg:p-8 mt-4 rounded-2xl backdrop-blur-md fade-in show">
+    <main id="main-content" class="flex-1 p-0 lg:p-6 rounded-2xl backdrop-blur-md fade-in show">
 
     </main>
 
