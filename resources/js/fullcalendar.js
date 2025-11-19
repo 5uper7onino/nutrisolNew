@@ -26,7 +26,13 @@ export function initFullCalendar(containerId = 'calendar') {
         },
     
         dateClick(info) {
-            if (info.date < new Date()) return;
+            //if (info.date < new Date()) return;
+            const now = new Date();
+
+            if (info.date < now) {
+                alert("No se puede calendarizar en días pasados.");
+                return;
+            }
             abrirModal(info);
         },
     
