@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nutrisol</title>
   @vite(['resources/js/app.js'])
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
   <style>
     html {
@@ -32,7 +31,7 @@
 <body x-data="{ mobileMenuOpen: false }" class="font-sans antialiased overflow-x-hidden flex min-h-screen">
 
   <!-- Sidebar lateral fijo -->
-  <aside class="hidden lg:flex flex-col w-64 bg-black/10 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
+  <aside class="hidden lg:flex flex-col w-64 bg-white/50 dark:bg-gray-900/50 backdrop-blur-lg shadow-lg border-r border-gray-200 dark:border-gray-700 fixed inset-y-0 left-0 z-40">
     <div class="flex flex-col items-center py-1 space-y-4">
       <x-logo-nutrisol size="80" />
       <div class="flex flex-col items-center py-1 space-y-4">
@@ -50,12 +49,12 @@
       </div>
     </div>
 
-    <nav class="flex-1 mt-6 space-y-2 px-4 text-gray-50 dark:text-gray-50">
+    <nav class="flex-1 mt-6 space-y-2 px-4 text-gray-700 dark:text-gray-50">
             <!-- Dropdown usuario -->
             <div x-data="{ open: false }" class="relative">
               <button @click="open = !open" class="w-full flex text-xl items-center font-bold justify-center px-4 py-2 rounded hover:bg-gray-200/20 dark:hover:bg-gray-800">
 
-                <span class="text-gray-50 dark:text-gray-50 uppercase">👤 {{ Auth::user()->name ?? 'Usuario' }}</span>
+                <span class="text-gray-700 dark:text-gray-50 uppercase"><span class="text-3xl">👤</span> {{ Auth::user()->name ?? 'Usuario' }}</span>
 
               </button>
 
@@ -74,16 +73,16 @@
               </div>
             </div>
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home">🏠 Home</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}">🧑‍⚕️ Pacientes</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home"><span class="text-3xl">🏠</span> Home</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}"><span class="text-3xl">🧑‍⚕️</span> Pacientes</a>
       @auth
         @if (Auth::user()->is_admin)
-          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}">👥 Usuarios</a>
+          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}"><span class="text-3xl">👥</span> Usuarios</a>
         @endif
       @endauth
-      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}">📋 Menús</a>
-      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}">🍅 Productos</a>
-      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-4xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}">🍅 Citas</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}"><span class="text-3xl">📋</span> Menús</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}"><span class="text-3xl">🍅</span> Productos</a>
+      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}"><span class="text-3xl">🍅</span> Citas</a>
 
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
 

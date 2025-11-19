@@ -12,7 +12,9 @@ import 'tom-select/dist/css/tom-select.default.css';
 
 import { initFullCalendar } from './fullcalendar';
 import esLocale from '@fullcalendar/core/locales/es';
-
+import Alpine from 'alpinejs';
+window.Alpine = Alpine;
+Alpine.start();
 window.initFullCalendar = initFullCalendar;
 
 // Inicializa el calendario si existe el elemento en el DOM
