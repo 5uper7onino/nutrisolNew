@@ -120,3 +120,8 @@
     cursor: pointer;
   }
   
+  .fc-day-disabled {
+    background-color: #3a3737 !important;
+    opacity: 0.5;
+    pointer-events: none;
+}

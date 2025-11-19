@@ -13,8 +13,30 @@ export function initFullCalendar(containerId = 'calendar') {
         locale: 'es-Es',
         initialView: 'timeGridWeek',
         slotMinTime: "08:00:00",
-        slotMaxTime: "19:00:00",
+        slotMaxTime: "19:30:00",
         slotDuration: "00:30:00",
+        allDaySlot: false,
+        dayCellClassNames(info) {
+            const today = new Date();
+            today.setHours(0,0,0,0);
+    
+            if (info.date < today) {
+                return ['fc-day-disabled']; // clase personalizada
+            }
+        },
+    
+        dateClick(info) {
+            if (info.date < new Date()) return;
+            abrirModal(info);
+        },
+    
+        selectAllow(info) {
+            return info.start >= new Date();
+        },
+    
+        eventAllow(dropInfo) {
+            return dropInfo.start >= new Date();
+        },
         height: "auto",
         expandRows: true,
         selectable: true,        // permite seleccionar
