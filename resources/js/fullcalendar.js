@@ -22,17 +22,21 @@ export function initFullCalendar(containerId = 'calendar') {
         events: '/citas/data',
 
         // 🔥 Click en fecha -> abrir modal
-        dateClick: function(info) {
-            window.dispatchEvent(
-                new CustomEvent("open-modal", {
-                    detail: {
-                        title: "Nueva Cita",
-                        url: "/citas/create?fecha=" + info.dateStr,
-                        maxWidth: "max-w-4xl"
-                    }
-                })
-            );
+        selectable: true,
+        selectMirror: true,
+        select: function(info) {
+            console.log("INICIO:", info.startStr);
+            console.log("FIN:", info.endStr);
+        
+            window.dispatchEvent(new CustomEvent("open-modal", {
+                detail: {
+                    title: "Nueva Cita",
+                    url: "/citas/create?inicio=" + info.startStr + "&fin=" + info.endStr,
+                    maxWidth: "max-w-4xl"
+                }
+            }));
         },
+        
         eventClick: function(info) {
 
             // Mostramos modal de confirmación usando tu sistema

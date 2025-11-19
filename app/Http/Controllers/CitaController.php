@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 
 class CitaController extends Controller
@@ -28,8 +29,12 @@ class CitaController extends Controller
 
     public function create(Request $request)
     {
-        $fecha = $request->query('fecha'); // Si quieres prellenar
-        return view('citas.create', compact('fecha'));
+        $inicioISO = $request->query('inicio'); // Si quieres prellenar
+        $finISO = $request->query('fin'); // Si quieres prellenar
+        $inicio = $inicioISO ? \Carbon\Carbon::parse($inicioISO) : null;
+        $fin = $finISO ? \Carbon\Carbon::parse($finISO) : null;
+        $pacientes = Paciente::orderby('nombre')->get();
+        return view('partials.citas.form', compact('inicio','fin', 'pacientes'));
     }
 
 
