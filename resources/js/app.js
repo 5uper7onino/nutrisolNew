@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
+import '../css/fc-minty.css';
 
 //import { initAjaxMenus } from './ajaxMenus';
 import { enableDynamicLoading } from './ajaxMenus';

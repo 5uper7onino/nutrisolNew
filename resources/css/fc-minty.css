@@ -1,0 +1,67 @@
+/* === Minty Tailwind Theme for FullCalendar === */
+
+.fc {
+    @apply text-gray-800;
+}
+
+/* Toolbar */
+.fc .fc-toolbar {
+    @apply flex flex-col gap-4 md:flex-row md:items-center md:justify-between;
+}
+
+.fc .fc-toolbar-title {
+    @apply text-2xl font-bold text-emerald-700;
+}
+
+/* Botones estilo Minty */
+.fc .fc-button {
+    @apply bg-emerald-500 border border-emerald-600 text-white px-3 py-1 rounded-md 
+           shadow-sm transition-all duration-150;
+}
+
+.fc .fc-button:hover {
+    @apply bg-emerald-600;
+}
+
+.fc .fc-button:disabled {
+    @apply bg-emerald-300 cursor-not-allowed;
+}
+
+/* Botón activo */
+.fc .fc-button-active {
+    @apply bg-emerald-700 border-emerald-800;
+}
+
+/* Grid del calendario */
+.fc .fc-daygrid-day {
+    @apply border border-gray-200 bg-white;
+}
+
+/* Número del día */
+.fc .fc-daygrid-day-number {
+    @apply text-emerald-700 font-semibold;
+}
+
+/* Hover día */
+.fc .fc-daygrid-day:hover {
+    @apply bg-emerald-50;
+}
+
+/* Eventos estilo Minty */
+.fc .fc-daygrid-event {
+    @apply bg-teal-500 text-white px-2 py-1 rounded shadow-sm;
+}
+
+.fc .fc-daygrid-event:hover {
+    @apply bg-teal-600;
+}
+
+/* Today highlight */
+.fc .fc-day-today {
+    @apply bg-emerald-100;
+}
+
+/* Header de semana (Lun, Mar, etc) */
+.fc .fc-col-header-cell {
+    @apply bg-emerald-600 text-white font-medium;
+}
