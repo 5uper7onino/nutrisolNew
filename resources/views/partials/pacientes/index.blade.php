@@ -20,7 +20,7 @@
         <table class="min-w-full bg-white/30 backdrop-blur-sm text-gray-900 rounded-xl select-none">
             <thead>
                 <tr class="backdrop-blur-xl text-gray-900 uppercase text-sm leading-normal select-none">
-                    <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">IDss</th>
+                    <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">IDs</th>
                     <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">Nombre</th>
                     <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">CURP</th>
                     <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">Acciones</th>
