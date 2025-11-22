@@ -1,6 +1,6 @@
 <div class="bg-transparent shadow-md rounded-lg p-0 lg:p-6">
     <div class="flex justify-between items-center mb-4">
-        <h2 class="text-4xl font-semibold text-gray-100">Usuarios</h2>
+        <h2 class="text-4xl font-semibold text-gray-700 dark:text-gray-100">Usuarios</h2>
         <button
             class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
             onclick="window.dispatchEvent(new CustomEvent('open-modal', {
@@ -19,10 +19,10 @@
         <table class="min-w-full bg-white/30 backdrop-blur-sm text-gray-900 rounded-xl select-none">
             <thead>
                 <tr class="backdrop-blur-xl text-gray-900 uppercase text-sm leading-normal select-none">
-                    <th class="py-3 px-6 text-gray-50 text-center text-lg">ID</th>
-                    <th class="py-3 px-6 text-gray-50 text-center text-lg">Nombre</th>
-                    <th class="py-3 px-6 text-gray-50 text-center text-lg">Email</th>
-                    <th class="py-3 px-6 text-gray-50 text-center text-lg">Acciones</th>
+                    <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">ID</th>
+                    <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">Nombre</th>
+                    <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">Email</th>
+                    <th class="py-3 px-6 text-gray-700 dark:text-gray-50 text-center text-lg">Acciones</th>
                 </tr>
             </thead>
             <tbody>

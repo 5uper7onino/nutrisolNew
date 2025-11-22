@@ -141,35 +141,44 @@
 
   <script>
     // Escuchar eventos personalizados
-    window.addEventListener('reload-usuarios', async () => {
-      const main = document.getElementById('main-content');
-      try {
-        const response = await fetch('/usuarios', { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-        if (!response.ok) throw new Error('Error al obtener la lista.');
-        const html = await response.text();
-        main.innerHTML = html;
-        if (typeof initUsuarios === 'function') initUsuarios();
-        void main.offsetWidth;
-        main.classList.add('show');
-      } catch (error) {
-        main.innerHTML = `<div class="p-6 text-center text-red-600"><h2 class="text-xl font-semibold">Error al recargar usuarios</h2><p class="text-sm">${error.message}</p></div>`;
-      }
-    });
+    function registerReloadEvent(eventName, url, initFnName) {
+  window.addEventListener(eventName, async () => {
+    const main = document.getElementById('main-content');
 
-    window.addEventListener('reload-productos', async () => {
-      const main = document.getElementById('main-content');
-      try {
-        const response = await fetch('/productos', { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
-        if (!response.ok) throw new Error('Error al obtener la lista.');
-        const html = await response.text();
-        main.innerHTML = html;
-        if (typeof initProductos === 'function') initProductos();
-        void main.offsetWidth;
-        main.classList.add('show');
-      } catch (error) {
-        main.innerHTML = `<div class="p-6 text-center text-red-600"><h2 class="text-xl font-semibold">Error al recargar productos</h2><p class="text-sm">${error.message}</p></div>`;
+    try {
+      const response = await fetch(url, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      });
+
+      if (!response.ok) throw new Error(`Error al obtener la lista.`);
+
+      const html = await response.text();
+      main.innerHTML = html;
+
+      // Ejecuta la función init si existe
+      if (typeof window[initFnName] === 'function') {
+        window[initFnName]();
       }
-    });
+
+      void main.offsetWidth; // fuerza reflow
+      main.classList.add('show');
+
+    } catch (error) {
+      main.innerHTML = `
+        <div class="p-6 text-center text-red-600">
+          <h2 class="text-xl font-semibold">Error al recargar</h2>
+          <p class="text-sm">${error.message}</p>
+        </div>
+      `;
+    }
+  });
+}
+
+// Registrar tus tres eventos
+registerReloadEvent('reload-usuarios', '/usuarios', 'initUsuarios');
+registerReloadEvent('reload-pacientes', '/pacientes', 'initUsuarios');
+registerReloadEvent('reload-productos', '/productos', 'initProductos');
+
   </script>
 </body>
 </html>
