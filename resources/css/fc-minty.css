@@ -65,3 +65,8 @@
 .fc .fc-col-header-cell {
     @apply bg-emerald-600 text-white font-medium;
 }
+.fc-event-title,
+.fc-event-time,
+.fc-event-main {
+    white-space: normal !important;
+}

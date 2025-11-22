@@ -20,7 +20,7 @@
             try {
                 const data = await res.json();
 
-                if (data.success) {
+                if (data.ok) {
                     $dispatch('close-modal');
                     window.dispatchEvent(new CustomEvent('reload-citas'));
                 } else {

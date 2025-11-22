@@ -16,6 +16,7 @@ export function initFullCalendar(containerId = 'calendar') {
         slotMaxTime: "19:30:00",
         slotDuration: "00:30:00",
         allDaySlot: false,
+        expandRows: true,
         dayCellClassNames(info) {
             const today = new Date();
             today.setHours(0,0,0,0);
@@ -24,6 +25,18 @@ export function initFullCalendar(containerId = 'calendar') {
                 return ['fc-day-disabled']; // clase personalizada
             }
         },
+        /*eventDidMount: function(info) {
+            const e = info.event.extendedProps;
+          
+            info.el.innerHTML = `
+              <div class="p-1">
+                <div class="font-bold">${info.event.title}</div>
+                <div>Cliente: ${info.event.start}</div>
+                <div>Tel: ${e.telefono}</div>
+                <div>Servicio: ${e.servicio}</div>
+              </div>
+            `;
+          },*/          
     
         dateClick(info) {
             //if (info.date < new Date()) return;

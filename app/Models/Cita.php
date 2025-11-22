@@ -12,4 +12,9 @@ class Cita extends Model
         'fin',
         'nota'
     ];
+
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class);
+    }
 }

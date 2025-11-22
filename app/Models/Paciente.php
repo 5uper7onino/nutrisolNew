@@ -69,5 +69,9 @@ class Paciente extends Model
         return $this->hasMany(Alergia::class);
     }
     
+    public function citas()
+    {
+        return $this->hasMany(Cita::class);
+    }
 
 }

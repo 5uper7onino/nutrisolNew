@@ -178,6 +178,7 @@
 registerReloadEvent('reload-usuarios', '/usuarios', 'initUsuarios');
 registerReloadEvent('reload-pacientes', '/pacientes', 'initUsuarios');
 registerReloadEvent('reload-productos', '/productos', 'initProductos');
+registerReloadEvent('reload-citas', '/citas', 'initFullCalendar');
 
   </script>
 </body>
