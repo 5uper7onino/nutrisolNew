@@ -33,8 +33,10 @@
                         confirmButton: 'glass-button',
                         cancelButton: 'glass-button'
                     }
-                });
+                }).then(()=>{
                     window.dispatchEvent(new CustomEvent('reload-citas'));
+                });
+                    
                 } else {
                     alert('Error: ' + (data.message || 'Verifique los campos.'));
                 }
