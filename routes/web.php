@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\ConsultaController;
 // Si no hay usuario autenticado → mandar al login
 Route::get('/', function () {
     return redirect()->route('login');
@@ -56,6 +57,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/citas/data', [CitaController::class, 'data']);
     Route::get('/citas/{cita}/confirm-delete', [CitaController::class, 'confirmDelete']);
     Route::delete('/citas/{cita}', [CitaController::class, 'destroy'])->name('citas.destroy');
-
+    
+    // Consultas
+    //Route::get('/pacientes/{paciente}/consultas', [ConsultaController::class, 'index']);
+    //Route::get('/consultas/{id}', [ConsultaController::class, 'show']);
+    Route::get('/consultas/crear', [ConsultaController::class, 'create'])->name('consultas.create');
+    Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
+    //Route::put('/consultas/{id}', [ConsultaController::class, 'update']);
+    //Route::delete('/consultas/{id}', [ConsultaController::class, 'destroy']);
+//
+    //Route::delete('/consulta-foto/{id}', [ConsultaController::class, 'deleteFoto']);
+//
 
 });

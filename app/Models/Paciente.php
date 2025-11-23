@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Padecimiento;
+use App\Models\Cirugia;
+use App\Models\Hospitalizacion;
+use App\Models\Alergia;
+use App\Models\Cita;
+use App\Models\Consulta;
 
 class Paciente extends Model
 {
@@ -72,6 +77,11 @@ class Paciente extends Model
     public function citas()
     {
         return $this->hasMany(Cita::class);
+    }
+
+    public function consultas()
+    {
+        return $this->hasMany(Consulta::class);
     }
 
 }
