@@ -15,8 +15,18 @@ export function initFullCalendar(containerId = 'calendar') {
         slotMinTime: "08:00:00",
         slotMaxTime: "19:30:00",
         slotDuration: "00:30:00",
+        expandRows: false,
         allDaySlot: false,
-        expandRows: true,
+        hiddenDays: [0],
+        nowIndicator: true,
+        nowIndicatorSnap: true,
+        eventTimeFormat: {
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: true // pon true si quieres AM/PM
+        },
+
+
         dayCellClassNames(info) {
             const today = new Date();
             today.setHours(0,0,0,0);
@@ -25,18 +35,27 @@ export function initFullCalendar(containerId = 'calendar') {
                 return ['fc-day-disabled']; // clase personalizada
             }
         },
-        /*eventDidMount: function(info) {
-            const e = info.event.extendedProps;
-          
-            info.el.innerHTML = `
-              <div class="p-1">
-                <div class="font-bold">${info.event.title}</div>
-                <div>Cliente: ${info.event.start}</div>
-                <div>Tel: ${e.telefono}</div>
-                <div>Servicio: ${e.servicio}</div>
-              </div>
+        eventDidMount: function(info) {
+
+            // Construir contenido del tooltip
+            const contenido = `
+                <strong>${info.event.title}</strong><br>
+                Inicio: ${info.event.start.toLocaleString()}<br>
+                Fin: ${info.event.end.toLocaleString()}
             `;
-          },*/          
+        
+            // Tooltip con Tippy.js
+            tippy(info.el, {
+                content: contenido,
+                allowHTML: true,
+                theme: "light-border",
+                placement: "top",
+                animation: 'shift-away',
+                duration: 200,
+                theme: "glass",
+            });
+        }
+        ,         
     
         dateClick(info) {
             //if (info.date < new Date()) return;
@@ -46,7 +65,7 @@ export function initFullCalendar(containerId = 'calendar') {
                 alert("No se puede calendarizar en días pasados.");
                 return;
             }
-            abrirModal(info);
+            //abrirModal(info);
         },
     
         selectAllow(info) {

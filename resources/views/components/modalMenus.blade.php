@@ -31,7 +31,7 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
 >
     <div
     x-bind:class="[
-        'border md:border-4 border-orange-600 md:rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full md:p-6 m-0 relative md:h-[80%] overflow-y-auto h-full ',
+        'border md:border-4 border-orange-600 md:rounded-2xl shadow-3xl bg-orange-50/50 w-11/12 sm:w-full md:p-6 m-0 relative  overflow-y-auto h-full md:h-auto ',
         width === 'max-w-sm' ? 'w-full md:max-w-sm' :
         width === 'max-w-md' ? 'w-full md:max-w-md' :
         width === 'max-w-lg' ? 'w-full md:max-w-lg' :

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CitaController extends Controller
 {
@@ -17,24 +18,29 @@ class CitaController extends Controller
     // JSON para FullCalendar
     public function data()
     {
-        $citas = Cita::select(
-            'id',
-            'inicio as start',
-            'fin as end',
-            'nota as title',
-            'paciente_id'
-        )->get();
+        //$citas = Cita::select(
+        //    'id',
+        //    'inicio as start',
+        //    'fin as end',
+        //    'nota as title',
+        //    'paciente_id'
+        //)->get();
 
         $citas = Cita::with('paciente')->get()->map(function($cita) {
             return [
                 'id' => $cita->id,
                 'start' => $cita->inicio,
                 'end' => $cita->fin,
-                'title' => $cita->paciente->nombre,
-                'paciente_id' => "{$cita->paciente->apellido_paterno} {$cita->paciente->apellido_materno}",
+                'inicio' => Carbon::parse($cita->inicio)->format('H:i'),
+                //'title' => $cita->paciente->nombre,
+                'title' => mb_convert_case(
+                    "{$cita->paciente->apellido_paterno} {$cita->paciente->apellido_materno} {$cita->paciente->nombre}",
+                    MB_CASE_TITLE,
+                    "UTF-8"
+                ),
+
             ];
         });
-
         return response()->json($citas);
     }
 

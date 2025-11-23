@@ -28,14 +28,21 @@
             </thead>
             <tbody>
                 @foreach ($pacientes as $paciente)
-                    <tr class="border-b hover:bg-gray-50">
+                    <tr class="border-b hover:bg-gray-50"
+                    onclick="window.dispatchEvent(new CustomEvent('open-modal', {
+                        detail: {
+                            title: 'Paciente',
+                            url: '{{ route('pacientes.edit', $paciente->id) }}',
+                            maxWidth: 'max-w-8xl'
+                        }
+                    }))">
                         <td class="py-1 px-3">{{ $paciente->id }}</td>
                         <td class="py-1 px-3">{{ $paciente->nombre }}</td>
                         <td class="py-1 px-3">{{ $paciente->curp }}</td>
                         <td class="py-1 px-3 text-center">
                             <button
                                 class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-                                onclick="window.dispatchEvent(new CustomEvent('open-modal', {
+                                onclick="event.stopPropagation(); window.dispatchEvent(new CustomEvent('open-modal', {
                                     detail: {
                                         title: 'Editar Paciente',
                                         url: '{{ route('pacientes.edit', $paciente->id) }}',
@@ -68,10 +75,10 @@
 
                     <button
                         class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
-                        onclick="window.dispatchEvent(new CustomEvent('open-modal', {
+                        onclick="this.stopPropagation(); window.dispatchEvent(new CustomEvent('open-modal', {
                             detail: {
                                 title: 'Editar Paciente',
-                                url: '{{ route('pacientes.edit', $paciente->id) }}',
+                                url: '{{ route('pacientes.show', $paciente->id) }}',
                                 maxWidth: 'max-w-8xl'
                             }
                         }))"

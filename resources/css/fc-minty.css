@@ -70,3 +70,6 @@
 .fc-event-main {
     white-space: normal !important;
 }
+.fc-timegrid-slot {
+    height: auto !important;
+}

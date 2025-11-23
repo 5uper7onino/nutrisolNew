@@ -1,6 +1,10 @@
 import './bootstrap';
 import '../css/app.css';
 import '../css/fc-minty.css';
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/shift-away.css";
+
 
 //import { initAjaxMenus } from './ajaxMenus';
 import { enableDynamicLoading } from './ajaxMenus';
@@ -16,6 +20,7 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 window.initFullCalendar = initFullCalendar;
+window.tippy = tippy;
 
 // Inicializa el calendario si existe el elemento en el DOM
 
