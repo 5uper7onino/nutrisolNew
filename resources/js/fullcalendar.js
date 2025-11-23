@@ -62,7 +62,18 @@ export function initFullCalendar(containerId = 'calendar') {
             const now = new Date();
 
             if (info.date < now) {
-                alert("No se puede calendarizar en días pasados.");
+                Swal.fire({
+                    title : 'Operación no permitida',
+                    text : 'No se pueden crear citas en fechas pasadas.',
+                    icon :'error',
+                    customClass: {
+                        popup: 'glass-popup',       // 👈 Glass en contenedor
+                        confirmButton: 'glass-button',
+                        cancelButton: 'glass-button'
+                    }
+                }
+                  )
+                  
                 return;
             }
             //abrirModal(info);

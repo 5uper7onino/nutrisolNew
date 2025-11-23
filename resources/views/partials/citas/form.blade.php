@@ -22,6 +22,18 @@
 
                 if (data.ok) {
                     $dispatch('close-modal');
+                    Swal.fire({
+                    title: 'Operación exitosa',
+                    text: 'Se ha guardado la cita correctamente.',
+                    icon: 'success',
+                    
+                    buttonsStyling: false,
+                    customClass: {
+                        popup: 'glass-popup',       // 👈 Glass en contenedor
+                        confirmButton: 'glass-button',
+                        cancelButton: 'glass-button'
+                    }
+                });
                     window.dispatchEvent(new CustomEvent('reload-citas'));
                 } else {
                     alert('Error: ' + (data.message || 'Verifique los campos.'));

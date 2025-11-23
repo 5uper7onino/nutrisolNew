@@ -24,6 +24,7 @@
         "@fullcalendar/interaction": "^6.1.19",
         "@fullcalendar/timegrid": "^6.1.19",
         "alpinejs": "^3.15.2",
+        "sweetalert2": "^11.26.3",
         "tippy.js": "^6.3.7",
         "tom-select": "^2.4.3"
     }
