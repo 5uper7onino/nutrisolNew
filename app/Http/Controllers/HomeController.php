@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cita;
+use App\Models\Paciente;
+use App\Models\Consulta;
+
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // Ejemplo: puedes enviar datos desde aquí
-        $mensaje = "Hola desde el controlador Home 🎉";
-        $fecha = now()->format('d/m/Y H:i:s');
-        if ($request->ajax()) {
-            // Solo devolvemos el contenido parcial (sin layout)
-            return view('partials.home', compact('mensaje', 'fecha'));
-        }
-        // Enviamos variables a la vista
-        return redirect()->route('root');
+        return view('partials.home', [
+            'proximasCitas'   => Cita::where('inicio', '>=', now())->orderBy('inicio')->take(5)->get(),
+            'pacientesNuevos' => Paciente::orderBy('created_at', 'desc')->take(5)->get(),
+            'consultasMes'    => Consulta::whereMonth('fecha', now()->month)->count(),
+            'ultimosAtendidos'=> Consulta::orderBy('fecha', 'desc')->take(6)->get(),
+        ]);
     }
+    
 }
