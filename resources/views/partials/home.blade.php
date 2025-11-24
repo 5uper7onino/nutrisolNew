@@ -1,7 +1,7 @@
 <div class="p-6 space-y-6">
 
     <!-- Encabezado -->
-    <h1 class="text-3xl font-semibold text-green-800 dark:text-gray-200 drop-shadow">
+    <h1 class="text-3xl font-semibold text-green-800 dark:text-gray-200 shadow-sm">
         Tablero del Consultorio
     </h1>
 
@@ -12,9 +12,9 @@
         <div class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl shadow-xl p-5 text-green-800 dark:text-gray-200">
             <h2 class="text-lg font-semibold mb-4">Próximas citas</h2>
 
-            @foreach ($proximasCitas as $cita)
+            @foreach ($proximasCitas ?? [] as $cita)
                 <div class="mb-3 p-3 rounded-xl bg-black/10 border border-white/10">
-                    <p class="font-medium">{{ $cita->paciente->nombre }}</p>
+                    <p class="font-medium">{{ $cita->paciente->nombre ?? 'Sin paciente' }}</p>
                     <p class="text-sm opacity-80">
                         {{ \Carbon\Carbon::parse($cita->inicio)->format('H:i') }}
                     </p>
