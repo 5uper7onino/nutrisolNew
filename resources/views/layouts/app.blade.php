@@ -138,7 +138,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-100 py-4 text-center text-gray-600">
-      © {{ date('Y') }} Desarrollo de Sistemas - DIF Jalisco
+      © {{ date('Y') }} JAMCode. Todos los derechos reservados.
     </footer>
   </div>
 
