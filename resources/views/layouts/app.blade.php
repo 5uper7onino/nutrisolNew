@@ -132,7 +132,7 @@
     </nav>
 
     <!-- Main dinámico -->
-    <main id="main-content" class="flex-1 p-0 lg:p-6 rounded-2xl backdrop-blur-md fade-in show">
+    <main id="main-content" class="flex-1 p-0 lg:p-6 rounded-2xl  fade-in show">
 
     </main>
 
