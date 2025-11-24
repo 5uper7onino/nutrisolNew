@@ -13,20 +13,29 @@ class ConsultaController extends Controller
     /**
      * Listado de consultas de un paciente.
      */
-    public function index($paciente_id)
+    public function index(Request $request,$paciente_id)
     {
         $consultas = Consulta::where('paciente_id', $paciente_id)
             ->with('fotos')
             ->orderBy('fecha', 'desc')
             ->get();
 
-        return response()->json($consultas);
+            if ($request->ajax()) {
+                // Solo devolvemos el contenido parcial (sin layout)
+                return response()->json($consultas);;
+            }
+            return redirect()->route('home');
+        
     }
 
     public function create(Request $request)
     {
         $pacientes = Paciente::all();
-        return view('partials.consultas.form', compact('pacientes'));
+        if ($request->ajax()) {
+            // Solo devolvemos el contenido parcial (sin layout)
+            return view('partials.consultas.form', compact('pacientes'));
+        }
+        return redirect()->route('home');
     }
 
     /**

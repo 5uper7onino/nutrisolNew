@@ -16,8 +16,14 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
         width = $event.detail.maxWidth || '{{ $defaultWidth }}';
         content = 'Cargando...';
         fetch($event.detail.url)
-            .then(res => res.text())
+            .then(res => 
+            res.text())
             .then(html => {
+            if (html.includes('<form') && html.toLowerCase().includes('password')) {
+                    // Casi siempre los formularios de login incluyen un input password
+                    window.location.href = '/login';
+                    return;
+                }
                 content = html; 
                 setTimeout(() => initTomSelect(), 50);
             })
