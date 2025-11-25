@@ -19,7 +19,8 @@ $defaultWidth = 'max-w-'.($maxWidth ?? '2xl');
             .then(res => 
             res.text())
             .then(html => {
-            if (html.includes('<form') && html.toLowerCase().includes('password')) {
+            
+            if ((html.includes('<form') && html.toLowerCase().includes('password')) && (html.includes('miformu'))) {
                     // Casi siempre los formularios de login incluyen un input password
                     window.location.href = '/login';
                     return;

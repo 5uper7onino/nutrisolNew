@@ -2,7 +2,7 @@
     <h1 class="text-2xl font-semibold mb-4">Calendario de Citas</h1>
 
     {{-- Contenedor donde FullCalendar se renderizará --}}
-    <div id="calendar" class="bg-white/20 shadow rounded-lg p-3"></div>
+    <div id="calendar" class="bg-green-600/20 backdrop-blur-lg shadow rounded-lg p-3"></div>
 </div>
 
 <script>
