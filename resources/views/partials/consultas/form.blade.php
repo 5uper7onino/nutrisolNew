@@ -1,5 +1,6 @@
 <form
     x-data
+    x-init = "inicializarCalculadora(); imageUploader();"
     @submit.prevent="
         const formData = new FormData($el);
 
@@ -46,27 +47,12 @@
     class="space-y-6 p-4"
 >
     <div class="grid grid-cols-3 gap-x-6">
-    <!-- PACIENTE -->
-    <x-nice-input type="email" name="email" label="Correo Electrónico"
-    width="w-full sm:w-1/2 lg:w-[30%]"
-    :value="$paciente->nombre ?? ''" />
 
-
-    <!-- FECHA -->
-    <div>
-        <label class="font-semibold block mb-1">Fecha</label>
-        <input 
-            type="date"
-            name="fecha"
-            class="w-full border rounded px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
-            required
-        >
-    </div>
     </div>
 
 
     <!-- PESO Y ALTURA -->
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-8 gap-4">
         <div>
             <label class="font-semibold block mb-1">Peso (kg)</label>
             <input 
@@ -88,10 +74,6 @@
                 class="calc-input w-full border rounded px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
             >
         </div>
-    </div>
-
-    <!-- MEDIDAS -->
-    <div class="grid grid-cols-3 gap-4">
         <div>
             <label class="font-semibold block mb-1">Cintura (cm)</label>
             <input 
@@ -113,7 +95,6 @@
                 class="calc-input w-full border rounded px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
             >
         </div>
-
         <div>
             <label class="font-semibold block mb-1">Cuello (cm)</label>
             <input 
@@ -124,25 +105,7 @@
                 class="calc-input w-full border rounded px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
             >
         </div>
-    </div>
-
-    <!-- SEXO -->
-    <div>
-        <label class="font-semibold block mb-1">Sexo</label>
-        <select 
-            id="sexo"
-            name="sexo"
-            class="calc-input w-full border rounded px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
-        >
-            <option value="H">Hombre</option>
-            <option value="M">Mujer</option>
-        </select>
-    </div>
-
-    <!-- CAMPOS CALCULADOS -->
-    <div class="grid grid-cols-3 gap-4">
-
-        <div>
+                <div>
             <label class="font-semibold block mb-1">IMC</label>
             <input 
                 id="imc"
@@ -151,7 +114,6 @@
                 class="w-full bg-gray-100 border rounded px-3 py-2"
             >
         </div>
-
         <div>
             <label class="font-semibold block mb-1">ICC</label>
             <input 
@@ -171,6 +133,12 @@
                 class="w-full bg-gray-100 border rounded px-3 py-2"
             >
         </div>
+    </div>
+
+
+    <!-- CAMPOS CALCULADOS -->
+    <div class="grid grid-cols-3 gap-4">
+
 
     </div>
 
@@ -194,17 +162,32 @@
         ></textarea>
     </div>
 
-    <!-- FOTOS -->
-    <div>
-        <label class="font-semibold block mb-1">Fotos (múltiples)</label>
-        <input 
-            type="file"
-            name="fotos[]"
-            multiple
-            accept="image/*"
-            class="w-full"
-        >
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+    @php
+        $fotos = [
+            ['label' => 'Frente', 'name' => 'foto_frente', 'col' => $paciente->foto_frente ?? ''],
+            ['label' => 'Espalda', 'name' => 'foto_espalda', 'col' => $paciente->foto_espalda ?? ''],
+            ['label' => 'Brazo', 'name' => 'foto_brazo', 'col' => $paciente->foto_brazo ?? ''],
+            ['label' => 'Pierna', 'name' => 'foto_pierna', 'col' => $paciente->foto_pierna ?? ''],
+            ['label' => 'Perfil', 'name' => 'foto_perfil', 'col' => $paciente->foto_perfil ?? ''],
+        ];
+    @endphp
+
+    @foreach ($fotos as $foto)
+        @php
+            $preview = $foto['col'] ? asset($foto['col']) : '';
+        @endphp
+
+        @include('components.photo', [
+            'label' => $foto['label'],
+            'name'  => $foto['name'],
+            'preview' => $preview
+        ])
+    @endforeach
+
+</div>
+
 
     <!-- BOTONES -->
     <div class="flex justify-end gap-2 pt-4">
@@ -222,53 +205,3 @@
 
 </form>
 
-<!-- JS CALCULADOR (funciona aun en render AJAX) -->
-<script>
-document.querySelectorAll('.calc-input').forEach(el => {
-    el.addEventListener('input', calcularValores);
-});
-
-function calcularValores() {
-    let peso    = parseFloat(document.getElementById('peso')?.value) || 0;
-    let altura  = parseFloat(document.getElementById('altura')?.value) || 0;
-    let cintura = parseFloat(document.getElementById('cintura')?.value) || 0;
-    let cadera  = parseFloat(document.getElementById('cadera')?.value) || 0;
-    let cuello  = parseFloat(document.getElementById('cuello')?.value) || 0;
-    let sexo    = document.getElementById('sexo')?.value || 'H';
-
-    // IMC
-    if (peso > 0 && altura > 0) {
-        let altura_m = altura / 100;
-        document.getElementById('imc').value = (peso / (altura_m ** 2)).toFixed(2);
-    }
-
-    // ICC
-    if (cintura > 0 && cadera > 0) {
-        document.getElementById('icc').value = (cintura / cadera).toFixed(2);
-    }
-
-    // IGC (US Navy)
-    if (cintura > 0 && cuello > 0 && altura > 0) {
-        let igc = 0;
-
-        if (sexo === 'H') {
-            igc = 495 / (
-                1.0324
-                - 0.19077 * Math.log10(cintura - cuello)
-                + 0.15456 * Math.log10(altura)
-            ) - 450;
-
-        } else {
-            if (cadera > 0) {
-                igc = 495 / (
-                    1.29579
-                    - 0.35004 * Math.log10(cintura + cadera - cuello)
-                    + 0.22100 * Math.log10(altura)
-                ) - 450;
-            }
-        }
-
-        document.getElementById('igc').value = igc.toFixed(2);
-    }
-}
-</script>

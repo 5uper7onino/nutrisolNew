@@ -54,7 +54,7 @@
                                 class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                                 onclick="event.stopPropagation(); window.dispatchEvent(new CustomEvent('open-modal', {
                                     detail: {
-                                        title: 'Consulta {{$paciente->paterno.' '.$paciente->nombre}}',
+                                        title: '{{mb_strtoupper($paciente->apellido_paterno.' '.$paciente->apellido_materno.' '.$paciente->nombre)}} [CONSULTA]',
                                         url: '{{ route('consultas.create',$paciente->id) }}',
                                         maxWidth: 'max-w-8xl'
                                     }
