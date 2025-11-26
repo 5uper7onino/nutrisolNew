@@ -10,7 +10,7 @@
 <div class="{{ $width }} mb-4">
     <label 
         for="{{ $name }}" 
-        class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1"
+        class="block text-sm font-semibold text-green-800 dark:text-gray-300 mb-1"
     >
         {{ $label }}
     </label>

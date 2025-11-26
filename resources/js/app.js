@@ -99,3 +99,4 @@ window.eliminarCita = async function(id) {
         alert("Error al eliminar: " + e.message);
     }
 };
+

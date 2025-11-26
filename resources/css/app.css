@@ -195,3 +195,6 @@
 .swal2-success-circular-line-left,.swal2-success-circular-line-right,.swal2-success-fix {
     background-color: transparent !important;
 }
+.menu-active {
+    @apply bg-white/40 backdrop-blur-md font-bold border-l-4 border-green-700 pl-3 cursor-default pointer-events-none;
+}

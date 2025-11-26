@@ -49,12 +49,12 @@
       </div>
     </div>
 
-    <nav class="flex-1 mt-6 space-y-2 px-4 text-gray-700 dark:text-gray-50">
+    <nav class="flex-1 mt-6 space-y-2 px-4 text-green-800 dark:text-gray-50">
             <!-- Dropdown usuario -->
             <div x-data="{ open: false }" class="relative">
-              <button @click="open = !open" class="w-full flex text-xl items-center font-bold justify-center px-4 py-2 rounded hover:bg-gray-200/20 dark:hover:bg-gray-800">
+              <button @click="open = !open" class="w-full flex text-xl items-center font-bold justify-center px-4 py-2 rounded hover:bg-black/20 dark:hover:bg-gray-800">
 
-                <span class="text-gray-700 dark:text-gray-50 uppercase"><span class="text-3xl">👤</span> {{ Auth::user()->name ?? 'Usuario' }}</span>
+                <span class="text-green-800 dark:text-gray-50 uppercase"><span class="text-3xl">👤</span> {{ Auth::user()->name ?? 'Usuario' }}</span>
 
               </button>
 
@@ -73,16 +73,16 @@
               </div>
             </div>
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home"><span class="text-3xl">🏠</span> Home</a>
-      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}"><span class="text-3xl">🧑‍⚕️</span> Pacientes</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-black/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('home') }}" id="home"><span class="text-3xl">🏠</span> Home</a>
+      <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-black/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('pacientes.index') }}"><span class="text-3xl">🧑‍⚕️</span> Pacientes</a>
       @auth
         @if (Auth::user()->is_admin)
-          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}"><span class="text-3xl">👥</span> Usuarios</a>
+          <a href="#" class="menu-link block px-4 py-2 rounded hover:bg-black/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('usuarios') }}"><span class="text-3xl">👥</span> Usuarios</a>
         @endif
       @endauth
-      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}"><span class="text-3xl">📋</span> Menús</a>
-      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}"><span class="text-3xl">🍅</span> Productos</a>
-      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-gray-200/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}"><span class="text-3xl">📆</span> Citas</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-black/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('menus') }}"><span class="text-3xl">📋</span> Menús</a>
+      <a href="#" class="hidden menu-link block px-4 py-2 rounded hover:bg-black/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('productos') }}"><span class="text-3xl">🍅</span> Productos</a>
+      <a href="#" class=" menu-link block px-4 py-2 rounded hover:bg-black/20 text-2xl dark:hover:bg-gray-800" data-url="{{ route('citas.index') }}"><span class="text-3xl">📆</span> Citas</a>
 
       <hr class="border-gray-300 border-4 dark:border-gray-600 my-3" />
 

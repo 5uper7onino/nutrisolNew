@@ -2,7 +2,7 @@
 
     <h2 class="text-lg font-semibold mb-3">¿Eliminar esta cita?</h2>
 
-    <p class="mb-4 text-gray-700">
+    <p class="mb-4 text-green-800">
         <strong>Fecha:</strong> {{ $cita->inicio }} <br>
         <strong>Nota:</strong> {{ $cita->nota ?? 'Sin nota' }}
     </p>

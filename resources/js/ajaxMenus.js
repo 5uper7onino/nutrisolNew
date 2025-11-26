@@ -52,6 +52,20 @@ export function enableDynamicLoading(containerSelector = 'body', mainSelector = 
             main.classList.add('show');
         }, 400);
     });
+    document.querySelectorAll('.menu-link').forEach(link => {
+        link.addEventListener('click', function () {
+    
+            // Remover activo de todos
+            document.querySelectorAll('.menu-link').forEach(l => {
+                l.classList.remove('menu-active');
+                l.style.pointerEvents = ""; // activa clic de nuevo
+            });
+    
+            // Marcar este como activo
+            this.classList.add('menu-active');
+            this.style.pointerEvents = "none"; // deshabilitar clic
+        });
+    });
 }
 
 
@@ -93,7 +107,7 @@ export function initAjaxMenus(){
                 } catch (error) {
                     main.innerHTML = `
                         <div class="p-6 text-center text-red-600">
-                            <h2 class="text-xl font-semibold">Error al cargar <span class="text-gray-700">${name}</span></h2>
+                            <h2 class="text-xl font-semibold">Error al cargar <span class="text-green-800">${name}</span></h2>
                             <p class="text-sm">${error.message}</p>
                         </div>
                     `;

@@ -3,15 +3,15 @@
 
     <form>
         <div class="mb-4">
-            <label class="block text-gray-700">Nombre</label>
+            <label class="block text-green-800">Nombre</label>
             <input type="text" class="border rounded w-full px-3 py-2">
         </div>
         <div class="mb-4">
-            <label class="block text-gray-700">Correo electrónico</label>
+            <label class="block text-green-800">Correo electrónico</label>
             <input type="email" class="border rounded w-full px-3 py-2">
         </div>
         <div class="mb-4">
-            <label class="block text-gray-700">Contraseña</label>
+            <label class="block text-green-800">Contraseña</label>
             <input type="password" class="border rounded w-full px-3 py-2">
         </div>
 

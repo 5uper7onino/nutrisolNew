@@ -32,7 +32,7 @@
         </span>
 
         <!-- Texto descriptivo -->
-        <span class="text-gray-700 dark:text-gray-200 font-medium select-none">
+        <span class="text-green-800 dark:text-gray-200 font-medium select-none">
             {{ $text }}
         </span>
 

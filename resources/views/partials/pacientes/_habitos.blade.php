@@ -32,7 +32,7 @@
             <label class="pretty-check cursor-pointer inline-flex items-center gap-1 relative">
                 <input type="checkbox" x-model="fuma" name="fuma" value="1" class="hidden">
                 <span class="w-6 h-6 block rounded-md border border-gray-400 transition"></span>
-                <span class="text-xl text-gray-700 dark:text-gray-200">Fuma</span>
+                <span class="text-xl text-green-800 dark:text-gray-200">Fuma</span>
             </label>
 
             <div x-show="fuma" x-transition class="mt-3 space-y-3">
@@ -59,7 +59,7 @@
             <label class="pretty-check cursor-pointer inline-flex items-center gap-1 relative">
                 <input type="checkbox" x-model="toma" name="toma" value="1" class="hidden">
                 <span class="w-6 h-6 block rounded-md border border-gray-400 transition"></span>
-                <span class="text-xl text-gray-700 dark:text-gray-200">Toma alcohol</span>
+                <span class="text-xl text-green-800 dark:text-gray-200">Toma alcohol</span>
             </label>
 
             <div x-show="toma" x-transition class="mt-3">
@@ -78,7 +78,7 @@
             <label class="pretty-check cursor-pointer inline-flex items-center gap-1 relative">
                 <input type="checkbox" x-model="haceEjercicio" name="hace_ejercicio" value="1" class="hidden">
                 <span class="w-6 h-6 block rounded-md border border-gray-400 transition"></span>
-                <span class="text-xl text-gray-700 dark:text-gray-200">Ejercicio</span>
+                <span class="text-xl text-green-800 dark:text-gray-200">Ejercicio</span>
             </label>
 
             <div x-show="haceEjercicio" x-transition class="mt-3">
@@ -97,7 +97,7 @@
             <label class="pretty-check cursor-pointer inline-flex items-center gap-1 relative">
                 <input type="checkbox" x-model="covid" name="tuvo_covid" value="1" class="hidden">
                 <span class="w-6 h-6 block rounded-md border border-gray-400 transition"></span>
-                <span class="text-xl text-gray-700 dark:text-gray-200">COVID</span>
+                <span class="text-xl text-green-800 dark:text-gray-200">COVID</span>
             </label>
 
             <div x-show="covid" x-transition class="mt-3">
@@ -116,7 +116,7 @@
             <label class="pretty-check cursor-pointer inline-flex items-center gap-1 relative">
                 <input type="checkbox" x-model="fracturas" name="fracturas" value="1" class="hidden">
                 <span class="w-6 h-6 block rounded-md border border-gray-400 transition"></span>
-                <span class="text-xl text-gray-700 dark:text-gray-200">Fracturas</span>
+                <span class="text-xl text-green-800 dark:text-gray-200">Fracturas</span>
             </label>
 
             <div x-show="fracturas" x-transition class="mt-3">
