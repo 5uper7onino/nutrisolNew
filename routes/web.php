@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     // Consultas
     //Route::get('/pacientes/{paciente}/consultas', [ConsultaController::class, 'index']);
     //Route::get('/consultas/{id}', [ConsultaController::class, 'show']);
-    Route::get('/consultas/crear', [ConsultaController::class, 'create'])->name('consultas.create');
+    Route::get('/consultas/{id}/crear', [ConsultaController::class, 'create'])->name('consultas.create');
     Route::post('/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
     //Route::put('/consultas/{id}', [ConsultaController::class, 'update']);
     //Route::delete('/consultas/{id}', [ConsultaController::class, 'destroy']);

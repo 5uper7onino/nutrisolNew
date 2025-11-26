@@ -28,14 +28,12 @@ class ConsultaController extends Controller
         
     }
 
-    public function create(Request $request)
+    public function create($id)
     {
-        $pacientes = Paciente::all();
-        if ($request->ajax()) {
+        //dd("en crear consulta");
+        $paciente = Paciente::findOrFail($id);
             // Solo devolvemos el contenido parcial (sin layout)
-            return view('partials.consultas.form', compact('pacientes'));
-        }
-        return redirect()->route('home');
+            return view('partials.consultas.form', compact('paciente'));
     }
 
     /**

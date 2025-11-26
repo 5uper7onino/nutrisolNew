@@ -45,12 +45,23 @@
     "
     class="space-y-6 p-4"
 >
-    <div class="grid grid-cols-3 gap-x-6">
+    <div class="grid grid-cols-2 gap-x-6">
     <!-- PACIENTE -->
-    <x-nice-input type="email" name="email" label="Correo Electrónico"
-    width="w-full sm:w-1/2 lg:w-[30%]"
-    :value="$paciente->nombre ?? ''" />
-
+    <div>
+        <label class="font-semibold block mb-1">Paciente</label>
+        <select 
+            name="paciente_id"
+            class="w-full border rounded px-3 py-2 focus:ring-orange-500 focus:border-orange-500"
+            required
+        >
+            <option value="">Seleccione un paciente</option>
+            @foreach ($pacientes as $p)
+                <option value="{{ $p->id }}">
+                    {{ $p->nombre }} {{ $p->apellido }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
     <!-- FECHA -->
     <div>
