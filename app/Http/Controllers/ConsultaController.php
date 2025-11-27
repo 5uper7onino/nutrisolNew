@@ -7,6 +7,10 @@ use App\Models\ConsultaFoto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Paciente;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Encoders\JpegEncoder;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ConsultaController extends Controller
 {
@@ -49,88 +53,69 @@ class ConsultaController extends Controller
      * Crear una nueva consulta.
      */
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'paciente_id' => 'required|exists:pacientes,id',
-            'fecha'       => 'required|date',
-            'peso'        => 'nullable|numeric',
-            'altura'      => 'nullable|numeric',
-            'cintura'     => 'nullable|numeric',
-            'cadera'      => 'nullable|numeric',
-            'cuello'      => 'nullable|numeric',
-    
-            // estos ya vendrán del formulario pero igual se recalculan aquí
-            'imc'         => 'nullable|numeric',
-            'icc'         => 'nullable|numeric',
-            'igc'         => 'nullable|numeric',
-    
+    { Log::info($request);
+        $request->validate([
+            'peso'      => 'nullable|numeric',
+            'altura'    => 'nullable|numeric',
+            'cintura'   => 'nullable|numeric',
+            'cadera'    => 'nullable|numeric',
+            'cuello'    => 'nullable|numeric',
+            'imc'       => 'nullable|numeric',
+            'icc'       => 'nullable|numeric',
+            'igc'       => 'nullable|numeric',
             'descripcion' => 'nullable|string',
             'plan'        => 'nullable|string',
-            'fotos.*'     => 'nullable|image|max:4096',
-            'tipo_foto.*' => 'nullable|string'
+
+            // Validación de fotos
+            'foto_frente'  => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'foto_espalda' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'foto_brazo'   => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'foto_pierna'  => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'foto_perfil'  => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
-    
-        /*
-        |--------------------------------------------------------------------------
-        | CÁLCULOS AUTOMÁTICOS
-        |--------------------------------------------------------------------------
-        */
-    
-        // IMC
-        if (!empty($validated['peso']) && !empty($validated['altura'])) {
-            $altura_m = $validated['altura'] / 100;
-            $validated['imc'] = round($validated['peso'] / ($altura_m * $altura_m), 2);
-        }
-    
-        // ICC = Cintura / Cadera
-        if (!empty($validated['cintura']) && !empty($validated['cadera'])) {
-            $validated['icc'] = round($validated['cintura'] / $validated['cadera'], 2);
-        }
-    
-        // IGC (US Navy - mujeres sería distinto, si quieres lo ajusto)
-        if (!empty($validated['cintura']) && !empty($validated['cuello']) && !empty($validated['altura'])) {
-            $validated['igc'] = round(
-                495 / (
-                    1.0324
-                    - 0.19077 * log10($validated['cintura'] - $validated['cuello'])
-                    + 0.15456 * log10($validated['altura'])
-                ) - 450,
-                2
-            );
-        }
-    
-        /*
-        |--------------------------------------------------------------------------
-        | Crear la consulta
-        |--------------------------------------------------------------------------
-        */
-        $consulta = Consulta::create($validated);
-    
-        /*
-        |--------------------------------------------------------------------------
-        | Manejo de fotos
-        |--------------------------------------------------------------------------
-        */
-        if ($request->hasFile('fotos')) {
-    
-            foreach ($request->file('fotos') as $index => $foto) {
-    
-                $path = $foto->store('consultas', 'public');
-    
-                ConsultaFoto::create([
-                    'consulta_id' => $consulta->id,
-                    'tipo'        => $request->tipo_foto[$index] ?? 'sin_tipo',
-                    'path'        => $path
-                ]);
+
+        $paciente = Paciente::findOrFail($request->paciente_id);
+
+        // Crear la consulta
+        $consulta = new Consulta();
+        $consulta->fecha   = now();
+        $consulta->paciente_id = $paciente->id;
+        $consulta->peso    = $request->peso;
+        $consulta->altura  = $request->altura;
+        $consulta->cintura = $request->cintura;
+        $consulta->cadera  = $request->cadera;
+        $consulta->cuello  = $request->cuello;
+        $consulta->imc     = $request->imc;
+        $consulta->icc     = $request->icc;
+        $consulta->igc     = $request->igc;
+        $consulta->descripcion = $request->descripcion;
+        $consulta->plan        = $request->plan;
+        $consulta->save();
+
+        // Guardar fotos
+        $fotos = [
+            'foto_frente',
+            'foto_espalda',
+            'foto_brazo',
+            'foto_pierna',
+            'foto_perfil',
+        ];
+
+        foreach ($fotos as $campo) {
+            $ruta = $this->savePhoto($request, $campo, $paciente->id);
+            if ($ruta) {
+                $consulta->{$campo} = $ruta;
             }
         }
-    
+
+        $consulta->save();
+
         return response()->json([
             'ok' => true,
-            'message' => 'Consulta creada correctamente',
-            'consulta' => $consulta->load('fotos')
+            'message' => 'Consulta registrada correctamente.',
         ]);
     }
+
     
 
     /**
@@ -211,4 +196,37 @@ class ConsultaController extends Controller
             'message' => 'Foto eliminada'
         ]);
     }
+
+    private function savePhoto(Request $request, string $inputName, int $pacienteId)
+    {
+        if (!$request->hasFile($inputName)) {
+            return null;
+        }
+
+        try {
+            $file = $request->file($inputName);
+
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file->getRealPath())->cover(800, 800);
+
+            // Carpeta y nombre
+            $folder = "paciente/{$pacienteId}";
+            $filename = uniqid("{$inputName}_") . '.jpg';
+            $relativePath = "$folder/$filename";
+
+            // Crear carpeta
+            Storage::makeDirectory($folder);
+
+            // Guardar en storage/app/public
+            Storage::disk('public')->put($relativePath, (string) $image->encode(new JpegEncoder(quality: 80)));
+
+            // Ruta pública
+            return "storage/paciente/{$pacienteId}/{$filename}";
+
+        } catch (\Exception $e) {
+            Log::error("Error guardando imagen $inputName", ['error' => $e->getMessage()]);
+            return null;
+        }
+    }
+
 }

@@ -12,11 +12,12 @@ return new class extends Migration
     public function up():void
     {
         Schema::table('consultas', function (Blueprint $table) {
-            $table->decimal('icc', 5, 2)->nullable();   // Cintura / Cadera
-            $table->decimal('igc', 5, 2)->nullable();   // Body Fat % (U.S. Navy)
-            $table->decimal('cintura_cm', 5, 2)->nullable();
-            $table->decimal('cadera_cm', 5, 2)->nullable();
-            $table->decimal('cuello_cm', 5, 2)->nullable();
+
+            $table->decimal('cintura', 5, 2)->nullable()->after('altura');
+            $table->decimal('cadera', 5, 2)->nullable()->after('cintura');
+            $table->decimal('cuello', 5, 2)->nullable()->after('cadera');
+            $table->decimal('icc', 5, 2)->nullable()->after('imc');   // Cintura / Cadera
+            $table->decimal('igc', 5, 2)->nullable()->after('icc');   // Body Fat % (U.S. Navy)
         });
     }
     
@@ -24,7 +25,7 @@ return new class extends Migration
     {
         Schema::table('consultas', function (Blueprint $table) {
             $table->dropColumn([
-                'imc','icc','igc','cintura_cm','cadera_cm','cuello_cm'
+                'imc','icc','igc','cintura','cadera','cuello'
             ]);
         });
     }

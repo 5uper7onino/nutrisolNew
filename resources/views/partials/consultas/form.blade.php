@@ -50,8 +50,7 @@
 
     </div>
 
-
-    <!-- PESO Y ALTURA -->
+    <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
     <div class="grid grid-cols-8 gap-4">
         <div>
             <label class="font-semibold block mb-1">Peso (kg)</label>
