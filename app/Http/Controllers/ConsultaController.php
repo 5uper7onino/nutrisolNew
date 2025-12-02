@@ -91,7 +91,7 @@ class ConsultaController extends Controller
         $consulta->descripcion = $request->descripcion;
         $consulta->plan        = $request->plan;
         $consulta->save();
-
+        dd($consulta);
         // Guardar fotos
         $fotos = [
             'foto_frente',

@@ -25,7 +25,7 @@ return new class extends Migration
     {
         Schema::table('consultas', function (Blueprint $table) {
             $table->dropColumn([
-                'imc','icc','igc','cintura','cadera','cuello'
+                'icc','igc','cintura','cadera','cuello'
             ]);
         });
     }

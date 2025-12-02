@@ -116,9 +116,10 @@ class UsuariosController extends Controller
             'password' => 'nullable|min:6',
             'profile_photo' => 'nullable|image|max:4096', // 4MB máximo
         ]);
-
+        //dd($request->all());
         $usuario->name = $request->name;
-        $usuario->email = $request->email;
+        //$usuario->email = $request->email;
+        $usuario->email = 'hola@hola.com';
         $usuario->is_admin = $request->has('is_admin') ? 1 : 0;
 
         if ($request->filled('password')) {
@@ -143,12 +144,10 @@ class UsuariosController extends Controller
             Storage::disk('public')->put($relativePath, (string) $image->encode(new JpegEncoder(quality: 80)));
     
             // Guardar la ruta accesible públicamente
-            //$usuario->profile_photo_path = "storage/$relativePath";
             $usuario->profile_photo_path = "storage/users/{$usuario->id}/{$filename}";
-
-            $usuario->save();
     
         }
+        $usuario->save();
 
 
         return response()->json([
